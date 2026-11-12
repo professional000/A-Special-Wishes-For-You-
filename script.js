@@ -13,7 +13,7 @@ const CONFIG = {
   // true = 30 seconds countdown for testing
   // false = actual birthday countdown
 
-  testMode: true,
+  testMode: false,
 
   testCountdownSeconds: 30,
 
