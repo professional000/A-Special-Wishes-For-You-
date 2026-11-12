@@ -1,512 +1,312 @@
 
-/* ==========================================
+/* =====================================
    ROYAL DIGITAL HUB
-   BAVANI BIRTHDAY SURPRISE
-========================================== */
+   BAVANI BIRTHDAY WEBSITE
+===================================== */
 
 const CONFIG = {
+  password: " 04/12/2006 ",
 
-  // PASSWORD
-  password: "BAVANI2026",
+  // 04 December 2026, 12 AM IST
+  birthdayDate: new Date("2026-12-03T18:30:00Z").getTime(),
 
-  // TEST MODE
-  // true = 30 seconds countdown for testing
-  // false = actual birthday countdown
+  // Feedback endpoint
+  feedbackURL: "https://formspree.io/f/xzepljrz",
 
-  testMode: true,
-
-  testCountdownSeconds: 30,
-
-  // 04 December 2026, 12:00 AM IST
-  // Equivalent UTC time: 03 December 2026, 18:30
-
-  birthdayTimestamp:
-    new Date("2026-12-03T18:30:00Z").getTime(),
-
-  // Formspree feedback endpoint
-  formspreeEndpoint:
-    "https://formspree.io/f/xzepljrz"
-
+  musicVolume: 0.35
 };
 
 
-// GET HTML ELEMENTS
+/* ELEMENTS */
 
-const $ = (id) => document.getElementById(id);
+const passwordScreen = document.getElementById("passwordScreen");
+const countdownScreen = document.getElementById("countdownScreen");
+const birthdayScreen = document.getElementById("birthdayScreen");
+const feedbackScreen = document.getElementById("feedbackScreen");
 
-const screens = [
-  "passwordScreen",
-  "countdownScreen",
-  "birthdayScreen",
-  "feedbackScreen"
-];
-
-let countdownInterval = null;
-let targetTimestamp = null;
-let roseRevealed = false;
-let pointerStart = null;
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
 
 
-// SCREEN NAVIGATION
+/* SCREEN NAVIGATION */
 
-function showScreen(id) {
+function showScreen(screen) {
+  [
+    passwordScreen,
+    countdownScreen,
+    birthdayScreen,
+    feedbackScreen
+  ].forEach(item => item.classList.add("hidden"));
 
-  screens.forEach(screenId => {
-
-    $(screenId).classList.toggle(
-      "hidden",
-      screenId !== id
-    );
-
-  });
-
+  screen.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 
-// FORMAT COUNTDOWN NUMBERS
+/* MUSIC */
 
-function formatTime(value) {
+music.volume = CONFIG.musicVolume;
 
-  return String(value).padStart(2, "0");
-
+async function playMusic() {
+  try {
+    await music.play();
+    musicButton.textContent = "♫ Pause Music";
+    musicButton.classList.add("playing");
+  } catch (error) {
+    musicButton.textContent = "♫ Tap to Play";
+  }
 }
 
-
-// COUNTDOWN FUNCTION
-
-function startCountdown() {
-
-  showScreen("countdownScreen");
-
-  if (CONFIG.testMode) {
-
-    targetTimestamp =
-      Date.now() +
-      CONFIG.testCountdownSeconds * 1000;
-
+musicButton.addEventListener("click", async () => {
+  if (music.paused) {
+    await playMusic();
   } else {
-
-    targetTimestamp =
-      CONFIG.birthdayTimestamp;
-
+    music.pause();
+    musicButton.textContent = "♫ Play Music";
+    musicButton.classList.remove("playing");
   }
+});
 
-  $("testModeNotice").classList.toggle(
-    "hidden",
-    !CONFIG.testMode
-  );
+music.addEventListener("ended", () => {
+  musicButton.textContent = "♫ Play Music";
+  musicButton.classList.remove("playing");
+});
 
-  if (countdownInterval) {
 
-    clearInterval(countdownInterval);
+/* PASSWORD */
 
-  }
+document.getElementById("passwordForm")
+.addEventListener("submit", async event => {
 
+  event.preventDefault();
 
-  function updateCountdown() {
+  const entered =
+    document.getElementById("passwordInput").value.trim();
 
-    const remaining = Math.max(
-      0,
-      targetTimestamp - Date.now()
-    );
+  const error =
+    document.getElementById("passwordError");
 
-    const totalSeconds =
-      Math.floor(remaining / 1000);
-
-    const days =
-      Math.floor(totalSeconds / 86400);
-
-    const hours =
-      Math.floor((totalSeconds % 86400) / 3600);
-
-    const minutes =
-      Math.floor((totalSeconds % 3600) / 60);
-
-    const seconds =
-      totalSeconds % 60;
-
-
-    $("days").textContent =
-      formatTime(days);
-
-    $("hours").textContent =
-      formatTime(hours);
-
-    $("minutes").textContent =
-      formatTime(minutes);
-
-    $("seconds").textContent =
-      formatTime(seconds);
-
-
-    // COUNTDOWN FINISHED
-
-    if (remaining <= 0) {
-
-      clearInterval(countdownInterval);
-
-      countdownInterval = null;
-
-      $("countdownStatus").textContent =
-        "Your special birthday surprise is ready!";
-
-      showBirthdayScreen();
-
-    }
-
-  }
-
-
-  updateCountdown();
-
-  countdownInterval =
-    setInterval(updateCountdown, 1000);
-
-}
-
-
-// BIRTHDAY SCREEN
-
-function showBirthdayScreen() {
-
-  showScreen("birthdayScreen");
-
-  $("roseStage").classList.remove("hidden");
-
-  $("birthdayMessage").classList.add("hidden");
-
-  $("roseWrap").classList.remove("slashing");
-
-  $("slashStatus").textContent =
-    "Touch and swipe from left to right across the rose.";
-
-  roseRevealed = false;
-
-}
-
-
-// ROSE SLASH EFFECT
-
-function revealBirthdayMessage() {
-
-  if (roseRevealed) return;
-
-  roseRevealed = true;
-
-  $("roseWrap").classList.add("slashing");
-
-  $("slashStatus").textContent =
-    "Your birthday wish is opening…";
-
-
-  setTimeout(() => {
-
-    $("roseStage").classList.add("hidden");
-
-    $("birthdayMessage").classList.remove("hidden");
-
-  }, 480);
-
-}
-
-
-// ROSE SWIPE START
-
-function handleRosePointerDown(event) {
-
-  if (roseRevealed) return;
-
-  pointerStart = {
-
-    x: event.clientX,
-
-    y: event.clientY
-
-  };
-
-}
-
-
-// ROSE SWIPE END
-
-function handleRosePointerUp(event) {
-
-  if (roseRevealed || !pointerStart) return;
-
-  const dx =
-    event.clientX - pointerStart.x;
-
-  const dy =
-    Math.abs(event.clientY - pointerStart.y);
-
-  pointerStart = null;
-
-
-  // Horizontal swipe required
-
-  if (
-    dx > 45 &&
-    Math.abs(dx) > dy * 1.15
-  ) {
-
-    revealBirthdayMessage();
-
-  }
-
-}
-
-
-// KEYBOARD SUPPORT
-
-function handleRoseKeyboard(event) {
-
-  if (
-    event.key === "Enter" ||
-    event.key === " "
-  ) {
-
-    event.preventDefault();
-
-    revealBirthdayMessage();
-
-  }
-
-}
-
-
-// PASSWORD SUBMISSION
-
-$("passwordForm").addEventListener(
-  "submit",
-  (event) => {
-
-    event.preventDefault();
-
-    const enteredPassword =
-      $("passwordInput").value.trim();
-
-
-    if (enteredPassword === CONFIG.password) {
-
-      $("passwordError").textContent = "";
-
-      $("passwordInput").value = "";
-
-      startCountdown();
-
-    } else {
-
-      $("passwordError").textContent =
-        "Incorrect password. Please try again.";
-
-      $("passwordInput").focus();
-
-    }
-
-  }
-);
-
-
-// ROSE EVENTS
-
-$("roseWrap").addEventListener(
-  "pointerdown",
-  handleRosePointerDown
-);
-
-$("roseWrap").addEventListener(
-  "pointerup",
-  handleRosePointerUp
-);
-
-$("roseWrap").addEventListener(
-  "pointercancel",
-  () => {
-
-    pointerStart = null;
-
-  }
-);
-
-$("roseWrap").addEventListener(
-  "keydown",
-  handleRoseKeyboard
-);
-
-
-// GO TO FEEDBACK PAGE
-
-$("toFeedbackButton").addEventListener(
-  "click",
-  () => {
-
-    showScreen("feedbackScreen");
-
-  }
-);
-
-
-// PRIVATE FEEDBACK SUBMISSION
-
-$("feedbackForm").addEventListener(
-  "submit",
-  async (event) => {
-
-    event.preventDefault();
-
-    const message =
-      $("feedbackMessage").value.trim();
-
-
-    if (!message) {
-
-      $("feedbackStatus").textContent =
-        "Please write your feedback before sending.";
-
-      return;
-
-    }
-
-
-    const button =
-      $("sendFeedbackButton");
-
-    const originalButtonText =
-      button.innerHTML;
-
-    button.disabled = true;
-
-    button.textContent = "Sending…";
-
-    $("feedbackStatus").textContent = "";
-
-
-    const formData =
-      new FormData($("feedbackForm"));
-
-    formData.append(
-      "_subject",
-      "BAVANI Birthday Website - Private Feedback"
-    );
-
-    formData.append(
-      "website",
-      "BAVANI Birthday Surprise"
-    );
-
-
-    try {
-
-      const response = await fetch(
-        CONFIG.formspreeEndpoint,
-        {
-
-          method: "POST",
-
-          body: formData,
-
-          headers: {
-            "Accept": "application/json"
-          }
-
-        }
-      );
-
-
-      if (response.ok) {
-
-        $("feedbackStatus").textContent =
-          "Thank you! Your feedback has been sent privately. ❤️";
-
-        $("feedbackForm").reset();
-
-      } else {
-
-        $("feedbackStatus").textContent =
-          "Feedback could not be sent. Please check the Formspree setup.";
-
-      }
-
-    } catch (error) {
-
-      $("feedbackStatus").textContent =
-        "Network error. Please check your internet and try again.";
-
-    } finally {
-
-      button.disabled = false;
-
-      button.innerHTML = originalButtonText;
-
-    }
-
-  }
-);
-
-
-/* =================================
-   FLOATING EMOJI GENERATOR
-================================= */
-
-const floatingEmojis = [
-  "❤️",
-  "💖",
-  "💕",
-  "💛",
-  "✨",
-  "🌹",
-  "💗",
-  "💝"
-];
-
-const floatingContainer =
-  document.getElementById("floatingEffects");
-
-function createFloatingEmoji() {
-
-  if (
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches
-  ) {
+  if (entered !== CONFIG.password) {
+    error.textContent = "Incorrect password! Try again.";
     return;
   }
 
-  const emoji = document.createElement("span");
+  error.textContent = "";
 
-  emoji.className = "floating-emoji";
+  showScreen(countdownScreen);
 
-  emoji.textContent =
-    floatingEmojis[
-      Math.floor(Math.random() * floatingEmojis.length)
-    ];
+  // Music starts after the visitor's interaction.
+  await playMusic();
 
-  const left = Math.random() * 95;
-  const size = 16 + Math.random() * 18;
-  const duration = 6 + Math.random() * 5;
+  updateCountdown();
+});
 
-  emoji.style.setProperty(
-    "--left",
-    left + "%"
-  );
 
-  emoji.style.setProperty(
-    "--size",
-    size + "px"
-  );
+/* COUNTDOWN */
 
-  emoji.style.setProperty(
-    "--duration",
-    duration + "s"
-  );
+function updateCountdown() {
 
-  floatingContainer.appendChild(emoji);
+  const now = Date.now();
+  const difference = CONFIG.birthdayDate - now;
 
-  setTimeout(() => {
-    emoji.remove();
-  }, duration * 1000);
+  if (difference <= 0) {
+
+    clearInterval(countdownInterval);
+
+    showScreen(birthdayScreen);
+
+    document.getElementById("countdownStatus").textContent =
+      "Your special day is here! Happy Birthday!";
+
+    return;
+  }
+
+  const days = Math.floor(difference / 86400000);
+  const hours = Math.floor((difference % 86400000) / 3600000);
+  const minutes = Math.floor((difference % 3600000) / 60000);
+  const seconds = Math.floor((difference % 60000) / 1000);
+
+  document.getElementById("days").textContent =
+    String(days).padStart(2, "0");
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
 }
 
-// Create one emoji every 650 milliseconds
+const countdownInterval = setInterval(updateCountdown, 1000);
 
-setInterval(createFloatingEmoji, 650);
+
+/* ROSE SWIPE */
+
+const rose = document.getElementById("roseWrap");
+const roseStage = document.getElementById("roseStage");
+const birthdayMessage = document.getElementById("birthdayMessage");
+const slashStatus = document.getElementById("slashStatus");
+
+let startX = 0;
+let startY = 0;
+let isDragging = false;
+let roseOpened = false;
+
+function revealBirthday() {
+
+  if (roseOpened) return;
+
+  roseOpened = true;
+
+  rose.classList.add("revealed");
+
+  slashStatus.textContent = "Your special message is opening...";
+
+  setTimeout(() => {
+    roseStage.classList.add("hidden");
+    birthdayMessage.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 650);
+}
+
+rose.addEventListener("pointerdown", event => {
+  if (roseOpened) return;
+
+  startX = event.clientX;
+  startY = event.clientY;
+  isDragging = true;
+
+  rose.setPointerCapture(event.pointerId);
+});
+
+rose.addEventListener("pointerup", event => {
+
+  if (!isDragging || roseOpened) return;
+
+  isDragging = false;
+
+  const distanceX = event.clientX - startX;
+  const distanceY = Math.abs(event.clientY - startY);
+
+  if (distanceX > 70 && distanceX > distanceY) {
+    revealBirthday();
+  } else {
+    slashStatus.textContent =
+      "Swipe further from left to right across the rose.";
+  }
+});
+
+rose.addEventListener("pointercancel", () => {
+  isDragging = false;
+});
+
+rose.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    revealBirthday();
+  }
+});
+
+
+/* FEEDBACK PAGE */
+
+document.getElementById("toFeedbackButton")
+.addEventListener("click", () => {
+  showScreen(feedbackScreen);
+});
+
+
+/* PRIVATE FEEDBACK SUBMISSION */
+
+document.getElementById("feedbackForm")
+.addEventListener("submit", async event => {
+
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const button = document.getElementById("sendFeedbackButton");
+  const status = document.getElementById("feedbackStatus");
+
+  if (!form.reportValidity()) return;
+
+  button.disabled = true;
+  button.textContent = "Sending...";
+  status.textContent = "";
+
+  const data = new FormData(form);
+
+  data.append("website", "BAVANI Birthday Surprise");
+  data.append("date", new Date().toLocaleString("en-IN"));
+
+  try {
+
+    const response = await fetch(CONFIG.feedbackURL, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Submission failed");
+    }
+
+    status.textContent =
+      "Thank you! Your feedback has been sent privately. ❤️";
+
+    status.style.color = "#f2d27b";
+
+    form.reset();
+
+    button.textContent = "Feedback Sent ✓";
+
+  } catch (error) {
+
+    status.textContent =
+      "Unable to send. Please check your internet and try again.";
+
+    status.style.color = "#ff9999";
+
+    button.disabled = false;
+    button.textContent = "Send Feedback ➤";
+
+  }
+
+});
+
+
+/* FLOATING EMOJI EFFECT */
+
+const floatingEffects = document.getElementById("floatingEffects");
+
+const emojis = ["❤️", "💛", "💖", "✨", "🌹", "💕"];
+
+function createFloatingEmoji() {
+
+  const emoji = document.createElement("span");
+
+  emoji.className = "float-emoji";
+  emoji.textContent = emojis[
+    Math.floor(Math.random() * emojis.length)
+  ];
+
+  emoji.style.left = Math.random() * 100 + "vw";
+  emoji.style.fontSize = (15 + Math.random() * 17) + "px";
+  emoji.style.animationDuration = (7 + Math.random() * 6) + "s";
+
+  floatingEffects.appendChild(emoji);
+
+  setTimeout(() => emoji.remove(), 14000);
+}
+
+setInterval(createFloatingEmoji, 1100);
+
+
+/* INITIAL CHECK */
+
+// Birthday has passed? Still show password first.
+// After password entry, countdown immediately opens the birthday screen
+// if the target date has already passed.
