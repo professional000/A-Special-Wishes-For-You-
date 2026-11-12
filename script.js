@@ -1,59 +1,82 @@
 
-/* =================================
+/* ==========================================
    ROYAL DIGITAL HUB
    BAVANI BIRTHDAY SCRAPBOOK
-================================= */
+   CORRECTED WORKING JAVASCRIPT
+========================================== */
 
 const CONFIG = {
-
-  // Password - change here
   password: "BAVANI2026",
 
-  // Birthday: 11 November 2026
-  // Midnight in India (IST)
-  birthdayDate: new Date(
-    "2026-11-11T18:30:00Z"
-  ).getTime()
-
+  // 11 November 2026, 12:00 AM India Time
+  birthdayDate: new Date("2026-11-11T18:30:00Z").getTime()
 };
 
 
-/* =================================
-   SCREEN ELEMENTS
-================================= */
+/* ==========================================
+   ELEMENTS
+========================================== */
 
-const countdownScreen =
-  document.getElementById("countdownScreen");
-
-const passwordScreen =
-  document.getElementById("passwordScreen");
-
-const scrapbookScreen =
-  document.getElementById("scrapbookScreen");
-
-const music =
-  document.getElementById("backgroundMusic");
+let countdownScreen;
+let passwordScreen;
+let scrapbookScreen;
+let music;
 
 
-/* =================================
-   COUNTDOWN SYSTEM
-================================= */
+/* ==========================================
+   INITIALIZE WEBSITE
+========================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  countdownScreen = document.getElementById("countdownScreen");
+  passwordScreen = document.getElementById("passwordScreen");
+  scrapbookScreen = document.getElementById("scrapbookScreen");
+  music = document.getElementById("backgroundMusic");
+
+  if (!countdownScreen || !passwordScreen || !scrapbookScreen) {
+    console.error("Website screen elements are missing.");
+    return;
+  }
+
+  // Password button
+  const passwordInput = document.getElementById("passwordInput");
+
+  if (passwordInput) {
+    passwordInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    });
+  }
+
+  // Start countdown
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Make functions accessible to HTML onclick buttons
+  window.checkPassword = checkPassword;
+  window.startBook = startBook;
+  window.nextPage = nextPage;
+  window.restartBook = restartBook;
+
+});
+
+
+/* ==========================================
+   COUNTDOWN
+========================================== */
 
 function updateCountdown() {
 
-  const now = Date.now();
-
-  const difference =
-    CONFIG.birthdayDate - now;
+  const difference = CONFIG.birthdayDate - Date.now();
 
   if (difference <= 0) {
 
     countdownScreen.classList.add("hidden");
-
     passwordScreen.classList.remove("hidden");
 
     return;
-
   }
 
   const days = Math.floor(
@@ -72,103 +95,107 @@ function updateCountdown() {
     (difference / 1000) % 60
   );
 
-  document.getElementById("days").textContent =
-    String(days).padStart(2, "0");
-
-  document.getElementById("hours").textContent =
-    String(hours).padStart(2, "0");
-
-  document.getElementById("minutes").textContent =
-    String(minutes).padStart(2, "0");
-
-  document.getElementById("seconds").textContent =
-    String(seconds).padStart(2, "0");
-
+  setText("days", days);
+  setText("hours", hours);
+  setText("minutes", minutes);
+  setText("seconds", seconds);
 }
 
-updateCountdown();
+function setText(id, value) {
 
-setInterval(updateCountdown, 1000);
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.textContent = String(value).padStart(2, "0");
+  }
+}
 
 
-/* =================================
-   PASSWORD PROTECTION
-================================= */
+/* ==========================================
+   PASSWORD CHECK
+========================================== */
 
 function checkPassword() {
 
-  const enteredPassword =
-    document.getElementById("passwordInput").value;
+  const input = document.getElementById("passwordInput");
+  const error = document.getElementById("passwordError");
 
-  const error =
-    document.getElementById("passwordError");
+  if (!input || !error) return;
 
   if (Date.now() < CONFIG.birthdayDate) {
 
-    error.textContent =
-      "This surprise is not available yet!";
-
+    error.textContent = "This surprise is not available yet!";
     return;
-
   }
 
-  if (enteredPassword === CONFIG.password) {
+  if (input.value.trim() === CONFIG.password) {
 
     passwordScreen.classList.add("hidden");
-
     scrapbookScreen.classList.remove("hidden");
 
     error.textContent = "";
 
-    // Music starts after user interaction
     if (music) {
       music.volume = 0.35;
-      music.play().catch(() => {});
+
+      const playPromise = music.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(function () {
+          console.log("Music playback requires user interaction.");
+        });
+      }
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
 
   } else {
 
-    error.textContent =
-      "Incorrect password! Try again.";
+    error.textContent = "Incorrect password! Try again.";
+    input.value = "";
+    input.focus();
 
   }
-
 }
 
 
-// Enter key support
-document.getElementById("passwordInput")
-  .addEventListener("keydown", function(event) {
-
-    if (event.key === "Enter") {
-      checkPassword();
-    }
-
-  });
-
-
-/* =================================
-   SCRAPBOOK PAGE SYSTEM
-================================= */
+/* ==========================================
+   HIDE ALL MEMORY PAGES
+========================================== */
 
 function hideAllPages() {
 
-  document.querySelectorAll(".memory-page")
-    .forEach(page => {
-      page.classList.add("hidden");
-    });
+  document.querySelectorAll(".memory-page").forEach(function (page) {
+
+    page.classList.add("hidden");
+
+  });
 
 }
+
+
+/* ==========================================
+   OPEN SCRAPBOOK
+========================================== */
 
 function startBook() {
 
-  document.querySelector(".cover")
-    .classList.add("hidden");
+  const cover = document.querySelector(".cover");
+  const firstPage = document.getElementById("page1");
+
+  if (!cover || !firstPage) {
+    console.error("Scrapbook cover or first page is missing.");
+    return;
+  }
+
+  cover.classList.add("hidden");
 
   hideAllPages();
 
-  document.getElementById("page1")
-    .classList.remove("hidden");
+  firstPage.classList.remove("hidden");
 
   window.scrollTo({
     top: 0,
@@ -177,16 +204,34 @@ function startBook() {
 
 }
 
+
+/* ==========================================
+   NEXT MEMORY PAGE
+========================================== */
 
 function nextPage(currentPage) {
 
-  const next = currentPage + 1;
+  currentPage = Number(currentPage);
 
-  document.getElementById("page" + currentPage)
-    .classList.add("hidden");
+  if (
+    !Number.isInteger(currentPage) ||
+    currentPage < 1 ||
+    currentPage >= 6
+  ) {
+    return;
+  }
 
-  document.getElementById("page" + next)
-    .classList.remove("hidden");
+  const current = document.getElementById("page" + currentPage);
+  const next = document.getElementById("page" + (currentPage + 1));
+
+  if (!current || !next) {
+    console.error("Memory page not found.");
+    return;
+  }
+
+  current.classList.add("hidden");
+
+  next.classList.remove("hidden");
 
   window.scrollTo({
     top: 0,
@@ -196,12 +241,19 @@ function nextPage(currentPage) {
 }
 
 
+/* ==========================================
+   READ AGAIN
+========================================== */
+
 function restartBook() {
+
+  const cover = document.querySelector(".cover");
+
+  if (!cover) return;
 
   hideAllPages();
 
-  document.querySelector(".cover")
-    .classList.remove("hidden");
+  cover.classList.remove("hidden");
 
   window.scrollTo({
     top: 0,
