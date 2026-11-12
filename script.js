@@ -1,263 +1,444 @@
 
 /* ==========================================
    ROYAL DIGITAL HUB
-   BAVANI BIRTHDAY SCRAPBOOK
-   CORRECTED WORKING JAVASCRIPT
+   BAVANI BIRTHDAY SURPRISE
 ========================================== */
 
 const CONFIG = {
+
+  // PASSWORD
   password: "BAVANI2026",
 
-  // 11 November 2026, 12:00 AM India Time
-  birthdayDate: new Date("2026-11-11T18:30:00Z").getTime()
+  // TEST MODE
+  // true = 30 seconds countdown for testing
+  // false = actual birthday countdown
+
+  testMode: true,
+
+  testCountdownSeconds: 30,
+
+  // 04 December 2026, 12:00 AM IST
+  // Equivalent UTC time: 03 December 2026, 18:30
+
+  birthdayTimestamp:
+    new Date("2026-12-03T18:30:00Z").getTime(),
+
+  // Formspree feedback endpoint
+  formspreeEndpoint:
+    "https://formspree.io/f/xzepljrz"
+
 };
 
 
-/* ==========================================
-   ELEMENTS
-========================================== */
+// GET HTML ELEMENTS
 
-let countdownScreen;
-let passwordScreen;
-let scrapbookScreen;
-let music;
+const $ = (id) => document.getElementById(id);
 
+const screens = [
+  "passwordScreen",
+  "countdownScreen",
+  "birthdayScreen",
+  "feedbackScreen"
+];
 
-/* ==========================================
-   INITIALIZE WEBSITE
-========================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  countdownScreen = document.getElementById("countdownScreen");
-  passwordScreen = document.getElementById("passwordScreen");
-  scrapbookScreen = document.getElementById("scrapbookScreen");
-  music = document.getElementById("backgroundMusic");
-
-  if (!countdownScreen || !passwordScreen || !scrapbookScreen) {
-    console.error("Website screen elements are missing.");
-    return;
-  }
-
-  // Password button
-  const passwordInput = document.getElementById("passwordInput");
-
-  if (passwordInput) {
-    passwordInput.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        checkPassword();
-      }
-    });
-  }
-
-  // Start countdown
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  // Make functions accessible to HTML onclick buttons
-  window.checkPassword = checkPassword;
-  window.startBook = startBook;
-  window.nextPage = nextPage;
-  window.restartBook = restartBook;
-
-});
+let countdownInterval = null;
+let targetTimestamp = null;
+let roseRevealed = false;
+let pointerStart = null;
 
 
-/* ==========================================
-   COUNTDOWN
-========================================== */
+// SCREEN NAVIGATION
 
-function updateCountdown() {
+function showScreen(id) {
 
-  const difference = CONFIG.birthdayDate - Date.now();
+  screens.forEach(screenId => {
 
-  if (difference <= 0) {
+    $(screenId).classList.toggle(
+      "hidden",
+      screenId !== id
+    );
 
-    countdownScreen.classList.add("hidden");
-    passwordScreen.classList.remove("hidden");
+  });
 
-    return;
-  }
-
-  const days = Math.floor(
-    difference / (1000 * 60 * 60 * 24)
-  );
-
-  const hours = Math.floor(
-    (difference / (1000 * 60 * 60)) % 24
-  );
-
-  const minutes = Math.floor(
-    (difference / (1000 * 60)) % 60
-  );
-
-  const seconds = Math.floor(
-    (difference / 1000) % 60
-  );
-
-  setText("days", days);
-  setText("hours", hours);
-  setText("minutes", minutes);
-  setText("seconds", seconds);
-}
-
-function setText(id, value) {
-
-  const element = document.getElementById(id);
-
-  if (element) {
-    element.textContent = String(value).padStart(2, "0");
-  }
 }
 
 
-/* ==========================================
-   PASSWORD CHECK
-========================================== */
+// FORMAT COUNTDOWN NUMBERS
 
-function checkPassword() {
+function formatTime(value) {
 
-  const input = document.getElementById("passwordInput");
-  const error = document.getElementById("passwordError");
+  return String(value).padStart(2, "0");
 
-  if (!input || !error) return;
+}
 
-  if (Date.now() < CONFIG.birthdayDate) {
 
-    error.textContent = "This surprise is not available yet!";
-    return;
-  }
+// COUNTDOWN FUNCTION
 
-  if (input.value.trim() === CONFIG.password) {
+function startCountdown() {
 
-    passwordScreen.classList.add("hidden");
-    scrapbookScreen.classList.remove("hidden");
+  showScreen("countdownScreen");
 
-    error.textContent = "";
+  if (CONFIG.testMode) {
 
-    if (music) {
-      music.volume = 0.35;
-
-      const playPromise = music.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(function () {
-          console.log("Music playback requires user interaction.");
-        });
-      }
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    targetTimestamp =
+      Date.now() +
+      CONFIG.testCountdownSeconds * 1000;
 
   } else {
 
-    error.textContent = "Incorrect password! Try again.";
-    input.value = "";
-    input.focus();
+    targetTimestamp =
+      CONFIG.birthdayTimestamp;
 
   }
-}
 
+  $("testModeNotice").classList.toggle(
+    "hidden",
+    !CONFIG.testMode
+  );
 
-/* ==========================================
-   HIDE ALL MEMORY PAGES
-========================================== */
+  if (countdownInterval) {
 
-function hideAllPages() {
+    clearInterval(countdownInterval);
 
-  document.querySelectorAll(".memory-page").forEach(function (page) {
-
-    page.classList.add("hidden");
-
-  });
-
-}
-
-
-/* ==========================================
-   OPEN SCRAPBOOK
-========================================== */
-
-function startBook() {
-
-  const cover = document.querySelector(".cover");
-  const firstPage = document.getElementById("page1");
-
-  if (!cover || !firstPage) {
-    console.error("Scrapbook cover or first page is missing.");
-    return;
   }
 
-  cover.classList.add("hidden");
 
-  hideAllPages();
+  function updateCountdown() {
 
-  firstPage.classList.remove("hidden");
+    const remaining = Math.max(
+      0,
+      targetTimestamp - Date.now()
+    );
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+    const totalSeconds =
+      Math.floor(remaining / 1000);
+
+    const days =
+      Math.floor(totalSeconds / 86400);
+
+    const hours =
+      Math.floor((totalSeconds % 86400) / 3600);
+
+    const minutes =
+      Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+      totalSeconds % 60;
+
+
+    $("days").textContent =
+      formatTime(days);
+
+    $("hours").textContent =
+      formatTime(hours);
+
+    $("minutes").textContent =
+      formatTime(minutes);
+
+    $("seconds").textContent =
+      formatTime(seconds);
+
+
+    // COUNTDOWN FINISHED
+
+    if (remaining <= 0) {
+
+      clearInterval(countdownInterval);
+
+      countdownInterval = null;
+
+      $("countdownStatus").textContent =
+        "Your special birthday surprise is ready!";
+
+      showBirthdayScreen();
+
+    }
+
+  }
+
+
+  updateCountdown();
+
+  countdownInterval =
+    setInterval(updateCountdown, 1000);
 
 }
 
 
-/* ==========================================
-   NEXT MEMORY PAGE
-========================================== */
+// BIRTHDAY SCREEN
 
-function nextPage(currentPage) {
+function showBirthdayScreen() {
 
-  currentPage = Number(currentPage);
+  showScreen("birthdayScreen");
+
+  $("roseStage").classList.remove("hidden");
+
+  $("birthdayMessage").classList.add("hidden");
+
+  $("roseWrap").classList.remove("slashing");
+
+  $("slashStatus").textContent =
+    "Touch and swipe from left to right across the rose.";
+
+  roseRevealed = false;
+
+}
+
+
+// ROSE SLASH EFFECT
+
+function revealBirthdayMessage() {
+
+  if (roseRevealed) return;
+
+  roseRevealed = true;
+
+  $("roseWrap").classList.add("slashing");
+
+  $("slashStatus").textContent =
+    "Your birthday wish is opening…";
+
+
+  setTimeout(() => {
+
+    $("roseStage").classList.add("hidden");
+
+    $("birthdayMessage").classList.remove("hidden");
+
+  }, 480);
+
+}
+
+
+// ROSE SWIPE START
+
+function handleRosePointerDown(event) {
+
+  if (roseRevealed) return;
+
+  pointerStart = {
+
+    x: event.clientX,
+
+    y: event.clientY
+
+  };
+
+}
+
+
+// ROSE SWIPE END
+
+function handleRosePointerUp(event) {
+
+  if (roseRevealed || !pointerStart) return;
+
+  const dx =
+    event.clientX - pointerStart.x;
+
+  const dy =
+    Math.abs(event.clientY - pointerStart.y);
+
+  pointerStart = null;
+
+
+  // Horizontal swipe required
 
   if (
-    !Number.isInteger(currentPage) ||
-    currentPage < 1 ||
-    currentPage >= 6
+    dx > 45 &&
+    Math.abs(dx) > dy * 1.15
   ) {
-    return;
+
+    revealBirthdayMessage();
+
   }
-
-  const current = document.getElementById("page" + currentPage);
-  const next = document.getElementById("page" + (currentPage + 1));
-
-  if (!current || !next) {
-    console.error("Memory page not found.");
-    return;
-  }
-
-  current.classList.add("hidden");
-
-  next.classList.remove("hidden");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 
 }
 
 
-/* ==========================================
-   READ AGAIN
-========================================== */
+// KEYBOARD SUPPORT
 
-function restartBook() {
+function handleRoseKeyboard(event) {
 
-  const cover = document.querySelector(".cover");
+  if (
+    event.key === "Enter" ||
+    event.key === " "
+  ) {
 
-  if (!cover) return;
+    event.preventDefault();
 
-  hideAllPages();
+    revealBirthdayMessage();
 
-  cover.classList.remove("hidden");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  }
 
 }
+
+
+// PASSWORD SUBMISSION
+
+$("passwordForm").addEventListener(
+  "submit",
+  (event) => {
+
+    event.preventDefault();
+
+    const enteredPassword =
+      $("passwordInput").value.trim();
+
+
+    if (enteredPassword === CONFIG.password) {
+
+      $("passwordError").textContent = "";
+
+      $("passwordInput").value = "";
+
+      startCountdown();
+
+    } else {
+
+      $("passwordError").textContent =
+        "Incorrect password. Please try again.";
+
+      $("passwordInput").focus();
+
+    }
+
+  }
+);
+
+
+// ROSE EVENTS
+
+$("roseWrap").addEventListener(
+  "pointerdown",
+  handleRosePointerDown
+);
+
+$("roseWrap").addEventListener(
+  "pointerup",
+  handleRosePointerUp
+);
+
+$("roseWrap").addEventListener(
+  "pointercancel",
+  () => {
+
+    pointerStart = null;
+
+  }
+);
+
+$("roseWrap").addEventListener(
+  "keydown",
+  handleRoseKeyboard
+);
+
+
+// GO TO FEEDBACK PAGE
+
+$("toFeedbackButton").addEventListener(
+  "click",
+  () => {
+
+    showScreen("feedbackScreen");
+
+  }
+);
+
+
+// PRIVATE FEEDBACK SUBMISSION
+
+$("feedbackForm").addEventListener(
+  "submit",
+  async (event) => {
+
+    event.preventDefault();
+
+    const message =
+      $("feedbackMessage").value.trim();
+
+
+    if (!message) {
+
+      $("feedbackStatus").textContent =
+        "Please write your feedback before sending.";
+
+      return;
+
+    }
+
+
+    const button =
+      $("sendFeedbackButton");
+
+    const originalButtonText =
+      button.innerHTML;
+
+    button.disabled = true;
+
+    button.textContent = "Sending…";
+
+    $("feedbackStatus").textContent = "";
+
+
+    const formData =
+      new FormData($("feedbackForm"));
+
+    formData.append(
+      "_subject",
+      "BAVANI Birthday Website - Private Feedback"
+    );
+
+    formData.append(
+      "website",
+      "BAVANI Birthday Surprise"
+    );
+
+
+    try {
+
+      const response = await fetch(
+        CONFIG.formspreeEndpoint,
+        {
+
+          method: "POST",
+
+          body: formData,
+
+          headers: {
+            "Accept": "application/json"
+          }
+
+        }
+      );
+
+
+      if (response.ok) {
+
+        $("feedbackStatus").textContent =
+          "Thank you! Your feedback has been sent privately. ❤️";
+
+        $("feedbackForm").reset();
+
+      } else {
+
+        $("feedbackStatus").textContent =
+          "Feedback could not be sent. Please check the Formspree setup.";
+
+      }
+
+    } catch (error) {
+
+      $("feedbackStatus").textContent =
+        "Network error. Please check your internet and try again.";
+
+    } finally {
+
+      button.disabled = false;
+
+      button.innerHTML = originalButtonText;
+
+    }
+
+  }
+);
