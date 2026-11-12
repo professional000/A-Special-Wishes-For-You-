@@ -9,7 +9,7 @@ const CONFIG = {
   // Password - change here
   password: "BAVANI2026",
 
-  // Birthday: 14 November 2026
+  // Birthday: 11 November 2026
   // Midnight in India (IST)
   birthdayDate: new Date(
     "2026-11-13T18:30:00Z"
