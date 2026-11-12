@@ -73,35 +73,6 @@ music.addEventListener("ended", () => {
 });
 
 
-/* PASSWORD */
-
-document.getElementById("passwordForm")
-.addEventListener("submit", async event => {
-
-  event.preventDefault();
-
-  const entered =
-    document.getElementById("passwordInput").value.trim();
-
-  const error =
-    document.getElementById("passwordError");
-
-  if (entered !== CONFIG.password) {
-    error.textContent = "Incorrect password! Try again.";
-    return;
-  }
-
-  error.textContent = "";
-
-  showScreen(countdownScreen);
-
-  // Music starts after the visitor's interaction.
-  await playMusic();
-
-  updateCountdown();
-});
-
-
 /* COUNTDOWN */
 
 function updateCountdown() {
@@ -140,6 +111,37 @@ function updateCountdown() {
 }
 
 const countdownInterval = setInterval(updateCountdown, 1000);
+
+/* PASSWORD */
+
+document.getElementById("passwordForm")
+.addEventListener("submit", async event => {
+
+  event.preventDefault();
+
+  const entered =
+    document.getElementById("passwordInput").value.trim();
+
+  const error =
+    document.getElementById("passwordError");
+
+  if (entered !== CONFIG.password) {
+    error.textContent = "Incorrect password! Try again.";
+    return;
+  }
+
+  error.textContent = "";
+
+  showScreen(countdownScreen);
+
+  // Music starts after the visitor's interaction.
+  await playMusic();
+
+  updateCountdown();
+});
+
+
+
 
 
 /* ROSE SWIPE */
