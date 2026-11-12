@@ -9,7 +9,9 @@ const CONFIG = {
   password: "04/12/2006",
 
   // 04 December 2026, 12 AM IST
-  birthdayDate: Date.now() + 15000,
+  birthdayDate: new Date(
+  "2026-12-03T18:30:00Z"
+).getTime(),
    
 
   feedbackURL: "https://formspree.io/f/xzepljrz",
