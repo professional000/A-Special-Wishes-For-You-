@@ -442,3 +442,71 @@ $("feedbackForm").addEventListener(
 
   }
 );
+
+
+/* =================================
+   FLOATING EMOJI GENERATOR
+================================= */
+
+const floatingEmojis = [
+  "❤️",
+  "💖",
+  "💕",
+  "💛",
+  "✨",
+  "🌹",
+  "💗",
+  "💝"
+];
+
+const floatingContainer =
+  document.getElementById("floatingEffects");
+
+function createFloatingEmoji() {
+
+  if (
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+    return;
+  }
+
+  const emoji = document.createElement("span");
+
+  emoji.className = "floating-emoji";
+
+  emoji.textContent =
+    floatingEmojis[
+      Math.floor(Math.random() * floatingEmojis.length)
+    ];
+
+  const left = Math.random() * 95;
+  const size = 16 + Math.random() * 18;
+  const duration = 6 + Math.random() * 5;
+
+  emoji.style.setProperty(
+    "--left",
+    left + "%"
+  );
+
+  emoji.style.setProperty(
+    "--size",
+    size + "px"
+  );
+
+  emoji.style.setProperty(
+    "--duration",
+    duration + "s"
+  );
+
+  floatingContainer.appendChild(emoji);
+
+  setTimeout(() => {
+    emoji.remove();
+  }, duration * 1000);
+}
+
+// Create one emoji every 650 milliseconds
+
+setInterval(createFloatingEmoji, 650);
