@@ -12,7 +12,7 @@ const CONFIG = {
   // Birthday: 11 November 2026
   // Midnight in India (IST)
   birthdayDate: new Date(
-    "2026-11-13T18:30:00Z"
+    "2026-11-11T18:30:00Z"
   ).getTime()
 
 };
