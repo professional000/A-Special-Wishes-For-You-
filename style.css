@@ -1,0 +1,367 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #17130f;
+  color: #f5e9d0;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.background-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(#d6b879 1px, transparent 1px);
+  background-size: 45px 45px;
+  opacity: 0.12;
+}
+
+.screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.main-card {
+  width: 100%;
+  max-width: 470px;
+  padding: 40px 24px;
+  text-align: center;
+  background: linear-gradient(
+    145deg,
+    #30251a,
+    #17130f
+  );
+  border: 1px solid #aa8950;
+  border-radius: 22px;
+  box-shadow: 0 0 35px #000;
+}
+
+.brand {
+  color: #d7b66d;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.small-icon {
+  font-size: 55px;
+  margin: 30px 0 15px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+.main-card h1 {
+  font-size: 35px;
+  color: #e9c987;
+  line-height: 1.3;
+}
+
+.tamil {
+  margin-top: 20px;
+  line-height: 2;
+  color: #e7d7b8;
+}
+
+.subtext {
+  margin-top: 30px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #c7a45d;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 30px 0;
+}
+
+.time-box {
+  padding: 15px 4px;
+  background: #3c3021;
+  border: 1px solid #947541;
+  border-radius: 10px;
+}
+
+.time-box span {
+  display: block;
+  font-size: 25px;
+  color: #f3d28b;
+  font-weight: bold;
+}
+
+.time-box small {
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.date-text {
+  font-size: 12px;
+  color: #d5b77c;
+}
+
+.footer-note {
+  margin-top: 35px;
+  font-size: 11px;
+  color: #99896e;
+}
+
+#passwordInput {
+  width: 100%;
+  padding: 15px;
+  margin-top: 25px;
+  background: #211c16;
+  border: 1px solid #b4955d;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  border: 1px solid #e5c783;
+  border-radius: 10px;
+  background: linear-gradient(
+    120deg,
+    #a47b39,
+    #e3c17b
+  );
+  color: #20170c;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+#passwordError {
+  color: #ff8d8d;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+header {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.top-label {
+  font-size: 11px;
+  color: #c6a76c;
+  letter-spacing: 3px;
+  margin-top: 12px;
+}
+
+.scrapbook {
+  max-width: 650px;
+  width: 92%;
+  margin: auto;
+}
+
+.cover,
+.memory-page {
+  position: relative;
+  min-height: 580px;
+  padding: 40px 25px;
+  border-radius: 5px;
+  text-align: center;
+  color: #4b3823;
+  background:
+    linear-gradient(
+      135deg,
+      #f5e9cf,
+      #e8d4ae
+    );
+  box-shadow: 0 15px 40px #0009;
+  border: 8px solid #a48652;
+  outline: 1px solid #ddc28c;
+  outline-offset: -14px;
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover-decoration {
+  color: #a9874d;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.cover-small {
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+
+.cover h1 {
+  margin-top: 25px;
+  font-size: clamp(35px, 8vw, 55px);
+  color: #76552b;
+}
+
+.cover h2 {
+  margin-top: 15px;
+  font-size: 42px;
+  color: #a57b3c;
+  letter-spacing: 5px;
+}
+
+.cover-line {
+  width: 100px;
+  height: 2px;
+  background: #b08a4c;
+  margin: 25px;
+}
+
+.cover-year {
+  margin-top: 30px;
+  letter-spacing: 4px;
+}
+
+.memory-page {
+  margin-bottom: 35px;
+  animation: pageOpen 0.7s ease;
+}
+
+@keyframes pageOpen {
+  from {
+    opacity: 0;
+    transform: rotateY(-12deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+}
+
+.page-number {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 11px;
+  color: #967546;
+}
+
+.memory-icon {
+  display: block;
+  font-size: 48px;
+  margin-top: 45px;
+}
+
+.memory-page h2 {
+  font-size: 34px;
+  margin-top: 20px;
+  color: #75532c;
+}
+
+.memory-page h3 {
+  margin-top: 12px;
+  color: #a47a40;
+  letter-spacing: 3px;
+}
+
+.memory-content {
+  margin-top: 35px;
+  line-height: 2.1;
+  font-size: 15px;
+}
+
+.memory-content p {
+  margin-bottom: 17px;
+}
+
+.english {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: #8c6637;
+}
+
+.page-decoration {
+  margin-top: 20px;
+  color: #a78146;
+  font-size: 25px;
+}
+
+.final-page h1 {
+  font-size: 38px;
+  color: #865b28;
+  margin-top: 20px;
+}
+
+.final-page h2 {
+  font-size: 40px;
+}
+
+.final-wish {
+  margin-top: 25px;
+  font-family: 'Playfair Display', serif;
+  color: #996c32;
+  font-size: 20px;
+}
+
+.signature {
+  margin-top: 30px;
+  line-height: 2;
+  font-size: 13px;
+  color: #88683c;
+  letter-spacing: 1px;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 10px;
+  color: #b99a61;
+  font-size: 12px;
+  line-height: 2;
+}
+
+@media(max-width: 400px) {
+
+  .main-card {
+    padding: 30px 16px;
+  }
+
+  .time-box span {
+    font-size: 20px;
+  }
+
+  .cover,
+  .memory-page {
+    min-height: 550px;
+    padding: 30px 20px;
+  }
+
+  .memory-page h2 {
+    font-size: 27px;
+  }
+
+  .memory-content {
+    font-size: 13px;
+  }
+
+}
