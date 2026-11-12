@@ -19,8 +19,9 @@ const CONFIG = {
 
 /* ELEMENTS */
 
-const passwordScreen = document.getElementById("passwordScreen");
+
 const countdownScreen = document.getElementById("countdownScreen");
+const passwordScreen = document.getElementById("passwordScreen");
 const birthdayScreen = document.getElementById("birthdayScreen");
 const feedbackScreen = document.getElementById("feedbackScreen");
 
