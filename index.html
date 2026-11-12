@@ -1,457 +1,358 @@
 
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#17130f">
+  <meta name="theme-color" content="#650d16">
+  <meta name="description" content="A special birthday surprise for BAVANI">
 
-  <title>Happy Birthday Bavani | ROYAL DIGITAL HUB</title>
+  <title>Birthday Surprise | ROYAL DIGITAL HUB</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
 
-  <div class="background-stars"></div>
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
 
-  <!-- COUNTDOWN SCREEN -->
+<main class="app-shell">
 
-  <section id="countdownScreen" class="screen">
+<header class="brand">
+  ROYAL DIGITAL HUB <span>✦</span>
+</header>
 
-    <div class="main-card">
+<!-- PAGE 1: PASSWORD -->
 
-      <div class="brand">ROYAL DIGITAL HUB</div>
+<section id="passwordScreen" class="screen">
 
-      <div class="small-icon">🎁</div>
+  <div class="ornament">✦ ✧ ✦</div>
 
-      <h1>Something Special<br>Is Waiting!</h1>
+  <p class="eyebrow">A LITTLE SURPRISE IS WAITING</p>
 
-      <p class="tamil">
-        ஒரு அழகான நினைவுப் பயணம்<br>
-        உனக்காக காத்திருக்கிறது.
-      </p>
+  <h1>
+    For Someone<br>
+    <em>Special</em>
+  </h1>
 
-      <p class="subtext">BAVANI'S BIRTHDAY SURPRISE</p>
+  <p class="intro">
+    Enter the secret password to begin your birthday surprise.
+  </p>
 
-      <div class="countdown">
+  <form id="passwordForm" class="form-stack">
 
-        <div class="time-box">
-          <span id="days">00</span>
-          <small>DAYS</small>
-        </div>
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Enter password"
+      autocomplete="off"
+      required
+    >
 
-        <div class="time-box">
-          <span id="hours">00</span>
-          <small>HOURS</small>
-        </div>
+    <button class="gold-button" type="submit">
+      Unlock Surprise →
+    </button>
 
-        <div class="time-box">
-          <span id="minutes">00</span>
-          <small>MINUTES</small>
-        </div>
+  </form>
 
-        <div class="time-box">
-          <span id="seconds">00</span>
-          <small>SECONDS</small>
-        </div>
+  <p id="passwordError" class="error-message"></p>
 
-      </div>
+  <p class="tiny-note">
+    Made with care • Just birthday wishes
+  </p>
 
-      <p class="date-text">
-        14 NOVEMBER 2026 | 12:00 AM
-      </p>
+</section>
 
-      <p class="footer-note">
-        Made with care by ROYAL DIGITAL HUB
-      </p>
+
+<!-- PAGE 2: COUNTDOWN -->
+
+<section id="countdownScreen" class="screen hidden">
+
+  <div class="ornament">✦ ✧ ✦</div>
+
+  <p class="eyebrow">
+    THE SPECIAL DAY IS GETTING CLOSER
+  </p>
+
+  <h1>
+    Counting Down<br>
+    <em>To Your Day</em>
+  </h1>
+
+  <p class="date-line">
+    04 DECEMBER 2026 · 12:00 AM IST
+  </p>
+
+  <div class="countdown-grid">
+
+    <div class="time-box">
+      <strong id="days">00</strong>
+      <span>Days</span>
+    </div>
+
+    <div class="time-box">
+      <strong id="hours">00</strong>
+      <span>Hours</span>
+    </div>
+
+    <div class="time-box">
+      <strong id="minutes">00</strong>
+      <span>Minutes</span>
+    </div>
+
+    <div class="time-box">
+      <strong id="seconds">00</strong>
+      <span>Seconds</span>
+    </div>
+
+  </div>
+
+  <p id="countdownStatus" class="intro">
+    A little patience… your surprise will open at the right moment.
+  </p>
+
+  <p id="testModeNotice" class="test-notice hidden">
+    TEST MODE: Short countdown for checking.
+  </p>
+
+</section>
+
+
+<!-- PAGE 3: ROSE SURPRISE -->
+
+<section id="birthdayScreen" class="screen hidden">
+
+  <div id="roseStage">
+
+    <p class="eyebrow">ONE LITTLE SURPRISE</p>
+
+    <h1>
+      A Rose <em>For You</em>
+    </h1>
+
+    <p class="intro">
+      Swipe across the rose to reveal your birthday message.
+    </p>
+
+    <div
+      class="rose-wrap"
+      id="roseWrap"
+      role="button"
+      tabindex="0"
+      aria-label="Swipe across the rose"
+    >
+
+      <!-- SINGLE ROSE IMAGE DRAWN USING SVG -->
+
+      <svg class="rose-art" viewBox="0 0 300 330">
+
+        <defs>
+
+          <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff7770"/>
+            <stop offset=".48" stop-color="#c91532"/>
+            <stop offset="1" stop-color="#650817"/>
+          </linearGradient>
+
+          <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f7d66c"/>
+            <stop offset="1" stop-color="#9c6b18"/>
+          </linearGradient>
+
+        </defs>
+
+        <!-- STEM -->
+
+        <path
+          d="M150 150 C145 205 158 250 148 306"
+          stroke="#4b8a45"
+          stroke-width="9"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+        <!-- LEAVES -->
+
+        <path
+          d="M150 226 C103 190 77 218 119 247 C137 251 147 240 150 226Z"
+          fill="url(#leaf)"
+        />
+
+        <path
+          d="M151 263 C195 224 227 245 181 276 C164 280 154 272 151 263Z"
+          fill="url(#leaf)"
+        />
+
+        <!-- ROSE PETALS -->
+
+        <g fill="url(#petal)" stroke="#8d1023" stroke-width="2">
+
+          <path d="M150 158 C91 143 91 82 134 67 C167 54 198 84 184 119 C177 139 160 149 150 158Z"/>
+
+          <path d="M150 154 C107 125 120 55 158 48 C200 41 220 91 187 126 C174 140 161 148 150 154Z"/>
+
+          <path d="M151 154 C180 106 235 117 225 151 C217 183 176 186 151 154Z"/>
+
+          <path d="M147 154 C103 177 71 142 91 112 C109 86 142 108 147 154Z"/>
+
+          <path d="M150 150 C124 122 143 83 169 94 C192 104 180 143 150 150Z"/>
+
+          <path d="M145 150 C136 129 151 112 165 119 C179 128 166 146 145 150Z"/>
+
+        </g>
+
+        <path
+          d="M150 157 C130 145 135 124 151 119 C169 122 174 143 150 157Z"
+          fill="#ffb06c"
+        />
+
+      </svg>
+
+      <span id="slashLine" class="slash-line"></span>
+
+      <span class="swipe-hint">
+        SWIPE TO OPEN ✨
+      </span>
 
     </div>
 
-  </section>
+    <p id="slashStatus" class="tiny-note">
+      Touch and swipe from left to right across the rose.
+    </p>
 
+  </div>
 
-  <!-- PASSWORD SCREEN -->
 
-  <section id="passwordScreen" class="screen hidden">
+  <!-- BIRTHDAY MESSAGE -->
 
-    <div class="main-card">
+  <article id="birthdayMessage" class="birthday-message hidden">
 
-      <div class="brand">ROYAL DIGITAL HUB</div>
+    <div class="ornament">✦ ✧ ✦</div>
 
-      <div class="small-icon">🔐</div>
+    <p class="eyebrow">A WISH FROM THE HEART</p>
 
-      <h1>One Little Secret!</h1>
+    <h1>
+      Happy Birthday<br>
+      <em>BAVANI!</em>
+    </h1>
 
-      <p class="tamil">
-        இந்த நினைவுப் புத்தகத்தைத் திறக்க<br>
-        Password உள்ளிடவும்.
-      </p>
+    <div class="gold-divider"></div>
 
-      <input
-        type="password"
-        id="passwordInput"
-        placeholder="Enter Password"
-        autocomplete="off"
-      >
+    <p class="wish-text">
 
-      <button onclick="checkPassword()">
-        OPEN MY SCRAPBOOK ✨
-      </button>
+      இனிய பிறந்தநாள் வாழ்த்துகள், BAVANI! ❤️
 
-      <p id="passwordError"></p>
+      <br><br>
 
-    </div>
+      உன் வாழ்க்கையில் மகிழ்ச்சி நிறைந்த நாட்களும்,
+      மனதிற்கு அமைதி தரும் தருணங்களும்,
+      நீ நினைக்கும் நல்ல கனவுகள் நிறைவேறும்
+      வாய்ப்புகளும் என்றும் கிடைக்கட்டும்.
 
-  </section>
+      <br><br>
 
+      நல்ல ஆரோக்கியம், வெற்றி, நிம்மதி,
+      அன்பான மனிதர்கள் — இவை அனைத்தும்
+      உன் வாழ்க்கைப் பயணத்தில் தொடர்ந்து இருக்கட்டும்.
 
-  <!-- MAIN SCRAPBOOK -->
+      <br><br>
 
-  <section id="scrapbookScreen" class="hidden">
+      Have a beautiful birthday and a wonderful year ahead!
 
-    <header>
+    </p>
 
-      <div class="brand">ROYAL DIGITAL HUB</div>
+    <p class="signature">
+      With warm wishes ✨
+    </p>
 
-      <p class="top-label">A SPECIAL CREATION FOR YOU</p>
+    <button id="toFeedbackButton" class="gold-button" type="button">
+      Continue →
+    </button>
 
-    </header>
+  </article>
 
-    <main class="scrapbook">
+</section>
 
-      <div class="cover">
 
-        <div class="cover-decoration">✦ ✧ ✦</div>
+<!-- PAGE 4: FEEDBACK -->
 
-        <p class="cover-small">A BOOK OF MEMORIES</p>
+<section id="feedbackScreen" class="screen hidden">
 
-        <h1>Happy Birthday</h1>
+  <div class="ornament">✦ ✧ ✦</div>
 
-        <h2>BAVANI ❤️</h2>
+  <p class="eyebrow">YOUR THOUGHTS MATTER</p>
 
-        <div class="cover-line"></div>
+  <h1>
+    Share Your<br>
+    <em>Feelings</em>
+  </h1>
 
-        <p class="tamil">
-          சில நினைவுகள் மறக்க முடியாதவை...
-        </p>
+  <p class="intro">
 
-        <p class="cover-year">2019 — 2025</p>
+    இந்த Birthday Surprise உங்களுக்கு எப்படி இருந்தது?
 
-        <button onclick="startBook()">
-          OPEN YOUR SCRAPBOOK 📖
-        </button>
+    உங்கள் மனதில் தோன்றும் உணர்வுகள்,
+    எண்ணங்கள் மற்றும் கருத்துகளை
+    இங்கே எழுதிப் பகிருங்கள்.
 
-      </div>
+  </p>
 
+  <form id="feedbackForm" class="form-stack">
 
-      <!-- PAGE 1 -->
+    <label for="feedbackName" class="field-label">
+      Your name (optional)
+    </label>
 
-      <article class="memory-page hidden" id="page1">
+    <input
+      id="feedbackName"
+      name="name"
+      type="text"
+      placeholder="Your name"
+    >
 
-        <span class="page-number">01 / 06</span>
+    <label for="feedbackMessage" class="field-label">
+      Your feedback
+    </label>
 
-        <span class="memory-icon">🌸</span>
+    <textarea
+      id="feedbackMessage"
+      name="message"
+      rows="6"
+      placeholder="உங்கள் மனதில் தோன்றுவதை எழுதுங்கள்..."
+      required
+    ></textarea>
 
-        <h2>A Small Beginning</h2>
+    <button
+      id="sendFeedbackButton"
+      class="gold-button"
+      type="submit"
+    >
+      Send Feedback ➤
+    </button>
 
-        <h3>2019 – 2020</h3>
+  </form>
 
-        <div class="memory-content">
+  <p id="feedbackStatus" class="feedback-status"></p>
 
-          <p>
-            சில அறிமுகங்கள் எதிர்பாராமல் தொடங்கும்.
-          </p>
+  <p class="tiny-note">
+    Thank you for sharing your thoughts. ❤️
+  </p>
 
-          <p>
-            CORONA காலத்தில் வந்த ஒரு WhatsApp
-            message...
-          </p>
+</section>
 
-          <p>
-            யாரென்று தெரியாமல் தொடங்கிய
-            அந்தச் சிறிய உரையாடல்,
-            பின்னர் தினசரி பேசும் பழக்கமாக மாறியது.
-          </p>
 
-          <p class="english">
-            Sometimes, the smallest beginnings
-            become memorable chapters.
-          </p>
+<footer>
+  © 2026 ROYAL DIGITAL HUB · MADE WITH CARE
+</footer>
 
-        </div>
-
-        <div class="page-decoration">✧ ❀ ✧</div>
-
-        <button onclick="nextPage(1)">
-          NEXT MEMORY →
-        </button>
-
-      </article>
-
-
-      <!-- PAGE 2 -->
-
-      <article class="memory-page hidden" id="page2">
-
-        <span class="page-number">02 / 06</span>
-
-        <span class="memory-icon">📚</span>
-
-        <h2>School Days</h2>
-
-        <h3>10th Standard</h3>
-
-        <div class="memory-content">
-
-          <p>
-            CORONA காலத்திற்குப் பிறகு
-            பள்ளி வாழ்க்கையில் நிறைய மாற்றங்கள்.
-          </p>
-
-          <p>
-            10th ALL PASS!
-          </p>
-
-          <p>
-            அடுத்தடுத்த வகுப்புகள்,
-            படிப்பு, தேர்வுகள் என
-            நாட்கள் நகர்ந்தன.
-          </p>
-
-          <p class="english">
-            Those school days had their own
-            little stories.
-          </p>
-
-        </div>
-
-        <div class="page-decoration">✧ 📖 ✧</div>
-
-        <button onclick="nextPage(2)">
-          NEXT MEMORY →
-        </button>
-
-      </article>
-
-
-      <!-- PAGE 3 -->
-
-      <article class="memory-page hidden" id="page3">
-
-        <span class="page-number">03 / 06</span>
-
-        <span class="memory-icon">✍️</span>
-
-        <h2>Little Memories</h2>
-
-        <h3>11th & 12th Standard</h3>
-
-        <div class="memory-content">
-
-          <p>
-            Notes, Record Notes,
-            School conversations...
-          </p>
-
-          <p>
-            ஒரு நாள் Record Note எழுதிக் கொடுத்தது,
-            Contact Number கேட்டது,
-            Instagram-ல் பேசலாம் என்று சொன்னது...
-          </p>
-
-          <p>
-            இவையெல்லாம் வாழ்க்கையில்
-            மறக்க முடியாத சிறிய நிகழ்வுகள்.
-          </p>
-
-          <p class="english">
-            Not every memory needs a photograph.
-            Some stay in our minds.
-          </p>
-
-        </div>
-
-        <div class="page-decoration">✧ 🖋️ ✧</div>
-
-        <button onclick="nextPage(3)">
-          NEXT MEMORY →
-        </button>
-
-      </article>
-
-
-      <!-- PAGE 4 -->
-
-      <article class="memory-page hidden" id="page4">
-
-        <span class="page-number">04 / 06</span>
-
-        <span class="memory-icon">🎓</span>
-
-        <h2>Different Journeys</h2>
-
-        <h3>College Days</h3>
-
-        <div class="memory-content">
-
-          <p>
-            பள்ளி முடிந்து கல்லூரி வாழ்க்கை.
-          </p>
-
-          <p>
-            ஒவ்வொருவருக்கும் தனித்தனி
-            பயணங்கள், பொறுப்புகள்,
-            புதிய அனுபவங்கள்.
-          </p>
-
-          <p>
-            இரண்டு வருடங்கள் கடந்தாலும்
-            சில பழைய நினைவுகள்
-            மனதில் அப்படியே இருக்கும்.
-          </p>
-
-          <p class="english">
-            Time moves forward,
-            but memories remain.
-          </p>
-
-        </div>
-
-        <div class="page-decoration">✧ 🎓 ✧</div>
-
-        <button onclick="nextPage(4)">
-          NEXT MEMORY →
-        </button>
-
-      </article>
-
-
-      <!-- PAGE 5 -->
-
-      <article class="memory-page hidden" id="page5">
-
-        <span class="page-number">05 / 06</span>
-
-        <span class="memory-icon">🌿</span>
-
-        <h2>A New Chapter</h2>
-
-        <h3>2025</h3>
-
-        <div class="memory-content">
-
-          <p>
-            Pongal நேரத்தில் மீண்டும்
-            சந்தித்த அந்த நாள்...
-          </p>
-
-          <p>
-            காலம் எவ்வளவு மாறினாலும்
-            பழைய அறிமுகங்கள் சில நேரங்களில்
-            மீண்டும் நினைவுக்கு வரும்.
-          </p>
-
-          <p>
-            சில உரையாடல்கள்,
-            சில சிரிப்புகள்,
-            சில சாதாரண தருணங்கள்...
-          </p>
-
-          <p class="english">
-            A simple memory from another year.
-          </p>
-
-        </div>
-
-        <div class="page-decoration">✧ 🌼 ✧</div>
-
-        <button onclick="nextPage(5)">
-          FINAL PAGE →
-        </button>
-
-      </article>
-
-
-      <!-- FINAL PAGE -->
-
-      <article class="memory-page final-page hidden" id="page6">
-
-        <span class="page-number">06 / 06</span>
-
-        <span class="memory-icon">🎂</span>
-
-        <h1>Happy Birthday!</h1>
-
-        <h2>BAVANI ❤️</h2>
-
-        <div class="memory-content">
-
-          <p>
-            உன்னுடைய வாழ்க்கையில்
-            எப்போதும் மகிழ்ச்சி நிறைந்திருக்கட்டும்.
-          </p>
-
-          <p>
-            நீ நினைக்கும் நல்ல விஷயங்கள்
-            அனைத்தும் நிறைவேறட்டும்.
-          </p>
-
-          <p>
-            உன்னுடைய கனவுகளை அடைய
-            நிறைய வெற்றிகள் கிடைக்கட்டும்.
-          </p>
-
-          <p>
-            நல்ல ஆரோக்கியம்,
-            மனநிறைவு,
-            மகிழ்ச்சியான நாட்கள்
-            எப்போதும் உன்னுடன் இருக்கட்டும்.
-          </p>
-
-          <p class="english">
-            Wishing you a beautiful year
-            filled with happiness,
-            success and countless smiles.
-          </p>
-
-        </div>
-
-        <div class="final-wish">
-          Once Again, Happy Birthday! 🎉
-        </div>
-
-        <p class="signature">
-          Best Wishes,<br>
-          ROYAL DIGITAL HUB
-        </p>
-
-        <button onclick="restartBook()">
-          READ AGAIN ↻
-        </button>
-
-      </article>
-
-    </main>
-
-    <footer>
-      <p>© 2026 ROYAL DIGITAL HUB</p>
-      <p>Memories are priceless. ✨</p>
-    </footer>
-
-  </section>
-
-
-  <!-- OPTIONAL BACKGROUND MUSIC -->
-
-  <audio id="backgroundMusic" loop>
-    <source src="assets/soft-piano.mp3" type="audio/mpeg">
-  </audio>
-
-
-  <script src="./script.js" defer></script>
+</main>
 
 </body>
 </html>
