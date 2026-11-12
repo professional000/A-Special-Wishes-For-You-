@@ -32,8 +32,8 @@ const musicButton = document.getElementById("musicButton");
 
 function showScreen(screen) {
   [
-    passwordScreen,
     countdownScreen,
+    passwordScreen,
     birthdayScreen,
     feedbackScreen
   ].forEach(item => item.classList.add("hidden"));
