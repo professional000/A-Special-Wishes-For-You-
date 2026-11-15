@@ -1,786 +1,310 @@
 
 <!DOCTYPE html>
-<html lang="ta">
-
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16091e">
 
-<meta name="theme-color" content="#17080a">
+<title>Happy Birthday BAVANI.S ❤️</title>
 
-<meta name="description"
-content="A special birthday surprise for BAVANI ❤️ Created with love by ROYAL DIGITAL HUB.">
-
-<title>Birthday Surprise | ROYAL DIGITAL HUB</title>
-
-
-<!-- =================================
-     OPEN GRAPH - SOCIAL MEDIA PREVIEW
-================================= -->
-
-<meta property="og:type" content="website">
-
-<meta property="og:site_name"
-content="ROYAL DIGITAL HUB">
-
-<meta property="og:title"
-content="A Special Birthday Surprise for BAVANI ❤️">
-
-<meta property="og:description"
-content="A beautiful birthday surprise is waiting for you. Open and enjoy this special moment!">
-
-<meta property="og:image"
-content="https://professional000.github.io/A-Special-Wishes-For-You-/assets/preview.jpg">
-
-<meta property="og:image:secure_url"
-content="https://professional000.github.io/A-Special-Wishes-For-You-/assets/preview.jpg">
-
-<meta property="og:image:type"
-content="image/jpeg">
-
-<meta property="og:image:width"
-content="1200">
-
-<meta property="og:image:height"
-content="630">
-
-<meta property="og:url"
-content="https://professional000.github.io/A-Special-Wishes-For-You-/">
-
-
-<!-- TWITTER / X PREVIEW -->
-
-<meta name="twitter:card"
-content="summary_large_image">
-
-<meta name="twitter:title"
-content="A Special Birthday Surprise for BAVANI ❤️">
-
-<meta name="twitter:description"
-content="A beautiful birthday surprise by ROYAL DIGITAL HUB.">
-
-<meta name="twitter:image"
-content="https://professional000.github.io/A-Special-Wishes-For-You-/assets/preview.jpg">
-
-
-<!-- =================================
-     GOOGLE FONTS
-================================= -->
-
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Noto+Sans+Tamil:wght@400;500;600&display=swap"
-rel="stylesheet">
-
-
-<!-- CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
-
-
-<!-- JAVASCRIPT -->
-
-<script src="script.js" defer></script>
-
-
 </head>
-
 
 <body>
 
+<div id="particles"></div>
 
-<!-- =================================
-     BACKGROUND EFFECTS
-================================= -->
+<button id="musicBtn" onclick="toggleMusic()">
+♫ MUSIC
+</button>
 
-<div id="floatingEffects"></div>
-
-<div id="particleLayer"></div>
-
-<div class="glow glow-one"></div>
-
-<div class="glow glow-two"></div>
-
-
-<!-- =================================
-     BACKGROUND MUSIC
-================================= -->
-
-<audio id="backgroundMusic"
-loop
-preload="auto">
-
-<source
-src="assets/birthday-song.1.mp3"
-type="audio/mpeg">
-
+<audio id="music" loop>
+  <source src="birthday-music.mp3" type="audio/mpeg">
 </audio>
 
 
-<!-- MUSIC BUTTON -->
+<!-- PAGE 1 -->
 
-<button id="musicButton"
-class="music-button">
+<section class="page active" id="page1">
 
-♫ Play Music
+  <div class="glow-circle"></div>
 
-</button>
+  <p class="sub-title">A SPECIAL SURPRISE FOR</p>
 
+  <h1 class="glow-title">BAVANI.S</h1>
 
-<main class="app-shell">
+  <p class="intro">
+    Some moments are special.<br>
+    Some people make them unforgettable.
+  </p>
 
+  <div class="floating-icons">
+    <span>❤️</span>
+    <span>🌹</span>
+    <span>🦋</span>
+    <span>✨</span>
+    <span>💕</span>
+  </div>
 
-<!-- =================================
-     BRAND HEADER
-================================= -->
+  <button class="main-btn" onclick="startSurprise()">
+    START SURPRISE ✨
+  </button>
 
-<header class="brand">
-
-ROYAL DIGITAL HUB <span>✦</span>
-
-</header>
-
-
-
-<!-- =================================
-     PAGE 1 : START SCREEN
-================================= -->
-
-<section id="startScreen"
-class="screen">
-
-<div class="ornament">
-✦ ✧ ✦
-</div>
-
-<p class="eyebrow">
-A SPECIAL DAY IS WAITING
-</p>
-
-<h1>
-Something<br>
-<em>Beautiful Awaits</em>
-</h1>
-
-<p class="intro">
-
-ஒரு அழகான நாளுக்காக...
-ஒரு சிறிய அன்பான ஆச்சரியம் காத்திருக்கிறது.
-
-</p>
-
-<div class="start-icon">
-🎁
-</div>
-
-<button id="startButton"
-class="gold-button">
-
-Start Surprise ✨
-
-</button>
-
-<p class="tiny-note">
-
-Made with love • ROYAL DIGITAL HUB
-
-</p>
+  <p class="small-text">Made with love ❤️</p>
 
 </section>
 
 
+<!-- PAGE 2 COUNTDOWN -->
 
-<!-- =================================
-     PAGE 2 : COUNTDOWN
-================================= -->
+<section class="page" id="page2">
 
-<section id="countdownScreen"
-class="screen hidden">
+  <p class="sub-title">THE SPECIAL MOMENT</p>
 
-<div class="ornament">
-✦ ✧ ✦
-</div>
+  <h2 class="glow-title">Something Beautiful Is Waiting</h2>
 
-<p class="eyebrow">
-THE WAIT IS ALMOST OVER
-</p>
+  <p>December 04, 2026 | 12:00 AM</p>
 
-<h1>
+  <div class="countdown">
 
-Counting Down<br>
-<em>To Your Day</em>
+    <div class="time-box">
+      <strong id="days">00</strong>
+      <span>DAYS</span>
+    </div>
 
-</h1>
+    <div class="time-box">
+      <strong id="hours">00</strong>
+      <span>HOURS</span>
+    </div>
 
-<p class="date-line">
+    <div class="time-box">
+      <strong id="minutes">00</strong>
+      <span>MINUTES</span>
+    </div>
 
-04 DECEMBER 2026 · 12:00 AM IST
+    <div class="time-box">
+      <strong id="seconds">00</strong>
+      <span>SECONDS</span>
+    </div>
 
-</p>
+  </div>
 
-
-<div class="countdown-grid">
-
-
-<div class="time-box">
-
-<strong id="days">00</strong>
-
-<span>Days</span>
-
-</div>
-
-
-<div class="time-box">
-
-<strong id="hours">00</strong>
-
-<span>Hours</span>
-
-</div>
-
-
-<div class="time-box">
-
-<strong id="minutes">00</strong>
-
-<span>Minutes</span>
-
-</div>
-
-
-<div class="time-box">
-
-<strong id="seconds">00</strong>
-
-<span>Seconds</span>
-
-</div>
-
-
-</div>
-
-
-<p id="countdownStatus"
-class="intro">
-
-Every beautiful moment is worth waiting for... ❤️
-
-</p>
+  <p id="countMessage">Your surprise is waiting ❤️</p>
 
 </section>
 
 
+<!-- PAGE 3 PASSWORD -->
 
-<!-- =================================
-     PAGE 3 : PASSWORD
-================================= -->
+<section class="page" id="page3">
 
-<section id="passwordScreen"
-class="screen hidden">
+  <div class="glass-card">
 
-<div class="ornament">
-✦ ✧ ✦
-</div>
+    <div class="big-emoji">🔐</div>
 
-<p class="eyebrow">
-ONE LAST LITTLE SECRET
-</p>
+    <h2 class="glow-title">One Little Secret</h2>
 
-<h1>
+    <p>Enter your special password</p>
 
-Unlock Your<br>
-<em>Surprise</em>
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter Password"
+      autocomplete="off"
+    >
 
-</h1>
+    <button class="main-btn" onclick="checkPassword()">
+      UNLOCK ❤️
+    </button>
 
-<p class="intro">
+    <p id="passwordError"></p>
 
-உங்களுக்காக உருவாக்கப்பட்ட இந்த Birthday Surprise-ஐ
-திறக்க ரகசிய Password உள்ளிடுங்கள்.
-
-</p>
-
-<div class="lock-icon">
-🔐
-</div>
-
-
-<form id="passwordForm"
-class="form-stack">
-
-
-<input
-
-id="passwordInput"
-
-type="password"
-
-placeholder="Enter secret password"
-
-autocomplete="off"
-
-required
-
->
-
-
-<button class="gold-button"
-type="submit">
-
-Unlock Surprise →
-
-</button>
-
-
-</form>
-
-
-<p id="passwordError"
-class="error-message">
-
-</p>
+  </div>
 
 </section>
 
 
+<!-- PAGE 4 BIRTHDAY WISHES -->
 
-<!-- =================================
-     PAGE 4 : ROSE SURPRISE
-================================= -->
+<section class="page" id="page4">
 
-<section id="birthdayScreen"
-class="screen hidden">
+  <div class="glass-card">
 
+    <p class="sub-title">DECEMBER 04 • YOUR DAY</p>
 
-<!-- ROSE STAGE -->
+    <h1 class="glow-title">Happy Birthday</h1>
 
-<div id="roseStage">
+    <h2>BAVANI.S ❤️</h2>
 
+    <div id="typedText"></div>
 
-<p class="eyebrow">
+    <button
+      id="wishNext"
+      class="main-btn"
+      onclick="showPage(5)"
+      style="display:none"
+    >
+      WATCH YOUR SURPRISE ✨
+    </button>
 
-A LITTLE FLOWER FOR YOU
-
-</p>
-
-
-<h1>
-
-A Rose <em>For You</em>
-
-</h1>
-
-
-<p class="intro">
-
-இந்த ரோஜாவில் ஒரு அழகான வாழ்த்து மறைந்திருக்கிறது...
-Swipe செய்து திறந்து பாருங்கள்! ❤️
-
-</p>
-
-
-<div class="rose-wrap"
-id="roseWrap"
-
-role="button"
-
-tabindex="0"
-
-aria-label="Swipe across the rose to open">
-
-
-<svg class="rose-art"
-viewBox="0 0 300 330">
-
-
-<defs>
-
-
-<linearGradient id="petal"
-x1="0" y1="0" x2="1" y2="1">
-
-<stop offset="0"
-stop-color="#ffaaa5"/>
-
-<stop offset=".45"
-stop-color="#e51d45"/>
-
-<stop offset="1"
-stop-color="#650817"/>
-
-</linearGradient>
-
-
-<linearGradient id="leaf"
-x1="0" y1="0" x2="1" y2="1">
-
-<stop offset="0"
-stop-color="#b6e68b"/>
-
-<stop offset="1"
-stop-color="#27652d"/>
-
-</linearGradient>
-
-
-<filter id="roseGlow">
-
-<feGaussianBlur stdDeviation="5"/>
-
-</filter>
-
-
-</defs>
-
-
-<!-- STEM -->
-
-<path
-
-d="M150 150 C145 205 158 250 148 306"
-
-stroke="#438c45"
-
-stroke-width="9"
-
-fill="none"
-
-stroke-linecap="round"
-
-/>
-
-
-<!-- LEAVES -->
-
-<path
-
-d="M150 226 C103 190 77 218 119 247 C137 251 147 240 150 226Z"
-
-fill="url(#leaf)"
-
-/>
-
-
-<path
-
-d="M151 263 C195 224 227 245 181 276 C164 280 154 272 151 263Z"
-
-fill="url(#leaf)"
-
-/>
-
-
-<!-- ROSE PETALS -->
-
-<g fill="url(#petal)"
-stroke="#8d1023"
-stroke-width="2">
-
-
-<path d="M150 158 C91 143 91 82 134 67 C167 54 198 84 184 119 C177 139 160 149 150 158Z"/>
-
-<path d="M150 154 C107 125 120 55 158 48 C200 41 220 91 187 126 C174 140 161 148 150 154Z"/>
-
-<path d="M151 154 C180 106 235 117 225 151 C217 183 176 186 151 154Z"/>
-
-<path d="M147 154 C103 177 71 142 91 112 C109 86 142 108 147 154Z"/>
-
-<path d="M150 150 C124 122 143 83 169 94 C192 104 180 143 150 150Z"/>
-
-<path d="M145 150 C136 129 151 112 165 119 C179 128 166 146 145 150Z"/>
-
-
-</g>
-
-
-<path
-
-d="M150 157 C130 145 135 124 151 119 C169 122 174 143 150 157Z"
-
-fill="#ffb06c"
-
-/>
-
-
-</svg>
-
-
-<div id="scratchTrail"></div>
-
-
-<div class="rose-glitter">
-✦ ✨ ✦
-</div>
-
-
-<span class="swipe-hint">
-
-SWIPE TO OPEN ✨
-
-</span>
-
-
-</div>
-
-
-<p id="slashStatus"
-class="tiny-note">
-
-Touch and swipe from left to right across the rose.
-
-</p>
-
-
-</div>
-
-
-
-<!-- =================================
-     BIRTHDAY MESSAGE
-================================= -->
-
-<article id="birthdayMessage"
-class="birthday-message hidden">
-
-
-<div class="ornament">
-
-✦ ✧ ✦
-
-</div>
-
-
-<p class="eyebrow">
-
-A WISH FROM THE HEART
-
-</p>
-
-
-<h1>
-
-Happy Birthday<br>
-<em>BAVANI!</em>
-
-</h1>
-
-
-<div class="gold-divider"></div>
-
-
-<p class="wish-text">
-
-
-இனிய பிறந்தநாள் வாழ்த்துகள், BAVANI! ❤️
-
-
-<br><br>
-
-
-உன் வாழ்க்கையில் மகிழ்ச்சி நிறைந்த நாட்களும்,
-மனதிற்கு அமைதி தரும் தருணங்களும்,
-நீ நினைக்கும் நல்ல கனவுகள் நிறைவேறும்
-வாய்ப்புகளும் என்றும் கிடைக்கட்டும்.
-
-
-<br><br>
-
-
-உன் முகத்தில் இருக்கும் புன்னகை
-என்றும் மறையாமல் இருக்கட்டும்.
-உன் ஒவ்வொரு முயற்சியும் வெற்றியாக மாறட்டும்.
-
-
-<br><br>
-
-
-நல்ல ஆரோக்கியம், வெற்றி, நிம்மதி,
-அன்பான மனிதர்கள் — இவை அனைத்தும்
-உன் வாழ்க்கைப் பயணத்தில் தொடர்ந்து இருக்கட்டும்.
-
-
-<br><br>
-
-
-உன்னுடைய ஒவ்வொரு பிறந்தநாளும்
-முந்தைய ஆண்டைவிட இன்னும் அழகாகவும்
-மகிழ்ச்சியாகவும் அமையட்டும்.
-
-
-<br><br>
-
-
-May your life be filled with endless happiness,
-beautiful memories, success and countless smiles.
-
-
-<br><br>
-
-
-Have a beautiful birthday and a wonderful year ahead!
-
-
-</p>
-
-
-<p class="signature">
-
-With warm wishes ✨
-
-</p>
-
-
-<button id="toFeedbackButton"
-class="gold-button">
-
-Continue →
-
-</button>
-
-
-</article>
-
+  </div>
 
 </section>
 
 
+<!-- PAGE 5 VIDEO -->
 
-<!-- =================================
-     PAGE 5 : FEEDBACK
-================================= -->
+<section class="page video-page" id="page5">
 
-<section id="feedbackScreen"
-class="screen hidden">
+  <p class="video-heading">A SPECIAL VIDEO FOR YOU ❤️</p>
 
+  <video
+    id="birthdayVideo"
+    playsinline
+    webkit-playsinline
+    controls
+    preload="auto"
+    muted
+  >
+    <source src="219015.mp4" type="video/mp4">
+  </video>
 
-<div class="ornament">
+  <div class="video-buttons">
 
-✦ ✧ ✦
+    <button class="main-btn" onclick="playMyVideo()">
+      ▶ PLAY VIDEO
+    </button>
 
-</div>
+    <button class="secondary-btn" onclick="enableVideoSound()">
+      🔊 SOUND ON
+    </button>
 
+    <button class="secondary-btn" onclick="goToGift()">
+      NEXT SURPRISE ❤️
+    </button>
 
-<p class="eyebrow">
+  </div>
 
-YOUR THOUGHTS MATTER
-
-</p>
-
-
-<h1>
-
-Share Your<br>
-<em>Feelings</em>
-
-</h1>
-
-
-<p class="intro">
-
-இந்த Birthday Surprise உங்களுக்கு எப்படி இருந்தது?
-உங்கள் எண்ணங்களையும் கருத்துகளையும் பகிருங்கள்.
-
-</p>
-
-
-<form id="feedbackForm"
-class="form-stack">
-
-
-<label class="field-label"
-for="feedbackName">
-
-Your name (optional)
-
-</label>
-
-
-<input
-
-id="feedbackName"
-
-name="name"
-
-type="text"
-
-placeholder="Your name"
-
->
-
-
-<label class="field-label"
-for="feedbackMessage">
-
-Your feedback
-
-</label>
-
-
-<textarea
-
-id="feedbackMessage"
-
-name="message"
-
-rows="6"
-
-placeholder="உங்கள் மனதில் தோன்றுவதை எழுதுங்கள்..."
-
-required
-
-></textarea>
-
-
-<button id="sendFeedbackButton"
-class="gold-button"
-type="submit">
-
-Send Feedback ➤
-
-</button>
-
-
-</form>
-
-
-<p id="feedbackStatus"
-class="feedback-status">
-
-</p>
-
-
-<p class="tiny-note">
-
-Thank you for sharing your thoughts. ❤️
-
-</p>
-
+  <p id="videoError"></p>
 
 </section>
 
 
+<!-- PAGE 6 GIFT -->
 
-<!-- =================================
-     FOOTER
-================================= -->
+<section class="page" id="page6">
 
-<footer>
+  <p class="sub-title">A LITTLE GIFT</p>
 
-© 2026 ROYAL DIGITAL HUB · MADE WITH CARE
+  <h2 class="glow-title">Open Your Gift 🎁</h2>
 
-</footer>
+  <p id="giftHint">Tap the gift box ❤️</p>
+
+  <div id="giftBox" class="gift-box" onclick="openGift()">
+    🎁
+  </div>
+
+  <img
+    id="photoReveal"
+    src="gift-photo.jpg"
+    alt="Special Birthday Memory"
+  >
+
+  <p id="photoText" style="display:none">
+    A little memory, specially for you ❤️
+  </p>
+
+  <button
+    id="photoNext"
+    class="main-btn"
+    onclick="showPage(7)"
+    style="display:none"
+  >
+    ONE LAST THING 💌
+  </button>
+
+</section>
 
 
-</main>
+<!-- PAGE 7 FEEDBACK -->
 
+<section class="page" id="page7">
+
+  <div class="glass-card">
+
+    <h2 class="glow-title">One Last Question ❤️</h2>
+
+    <p>How do you feel about this surprise?</p>
+
+    <form
+      id="feedbackForm"
+      action="https://formspree.io/f/xzepljrz"
+      method="POST"
+    >
+
+      <label class="answer">
+        <input type="radio" name="feeling"
+        value="Very Happy ❤️" required>
+        Very Happy ❤️
+      </label>
+
+      <label class="answer">
+        <input type="radio" name="feeling"
+        value="This is so special 🥹">
+        This is so special 🥹
+      </label>
+
+      <label class="answer">
+        <input type="radio" name="feeling"
+        value="Loved it 💗">
+        Loved it 💗
+      </label>
+
+      <label class="answer">
+        <input type="radio" name="feeling"
+        value="Beautiful surprise ✨">
+        Beautiful surprise ✨
+      </label>
+
+      <textarea
+        name="message"
+        rows="3"
+        placeholder="Write something from your heart..."
+      ></textarea>
+
+      <input type="hidden" name="person" value="BAVANI.S">
+
+      <input type="hidden" name="website"
+      value="BAVANI Birthday Surprise">
+
+      <button type="submit" class="main-btn" id="submitBtn">
+        SEND MY FEELINGS ❤️
+      </button>
+
+    </form>
+
+    <div id="thankYou" style="display:none">
+
+      <h2 class="glow-title">Thank You ❤️</h2>
+
+      <p>Your feelings mean a lot.</p>
+
+      <p>Stay Happy. Keep Smiling. ✨</p>
+
+    </div>
+
+    <p id="formStatus"></p>
+
+  </div>
+
+</section>
+
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
