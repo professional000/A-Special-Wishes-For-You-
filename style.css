@@ -1,563 +1,1169 @@
+/* ==========================================
+   ROYAL DIGITAL HUB
+   BAVANI.S BIRTHDAY SURPRISE
+   LUXURY ROMANTIC GLOW THEME
+========================================== */
+
+
+/* ==========================================
+   01. GLOBAL SETTINGS
+========================================== */
 
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --pink: #ff69b4;
+    --light-pink: #ffc1e0;
+    --hot-pink: #ff1493;
+    --purple: #a855f7;
+    --violet: #7209b7;
+    --gold: #ffe5a3;
+    --white: #ffffff;
+    --dark: #100817;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-min-height: 100vh;
-background: #17080a;
-color: #f9e9c4;
-font-family: 'Noto Sans Tamil', 'DM Sans', sans-serif;
-overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: #08040d;
+    color: white;
+    overflow: hidden;
 }
 
-.hidden {
-display: none !important;
+
+/* ==========================================
+   02. PARTICLE CONTAINER
+========================================== */
+
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.glow {
-position: fixed;
-width: 300px;
-height: 300px;
-border-radius: 50%;
-filter: blur(100px);
-opacity: .22;
-pointer-events: none;
-z-index: -1;
+
+/* ==========================================
+   03. COMMON PAGE DESIGN
+========================================== */
+
+.page {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    padding: 25px 18px;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    text-align: center;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    isolation: isolate;
+
+    background-color: #16091e;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.glow-one {
-background: #bd1734;
-top: -100px;
-left: -100px;
+.page.active {
+    display: flex;
+    animation: pageEnter 1s ease both;
 }
 
-.glow-two {
-background: #d89b28;
-bottom: -100px;
-right: -100px;
+
+/* PAGE TRANSITION */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: scale(1.04);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
 }
 
-.app-shell {
-width: 100%;
-max-width: 700px;
-margin: auto;
-padding: 20px;
-position: relative;
-z-index: 2;
+
+/* ==========================================
+   04. BACKGROUND IMAGE THEMES
+========================================== */
+
+/* PAGE 1 - PURPLE HEARTS */
+
+#page1 {
+    background-image:
+        url("images/purple-hearts.jpg");
 }
 
-.brand {
-text-align: center;
-color: #eac66c;
-font-weight: 700;
-letter-spacing: 4px;
-font-size: 13px;
-padding: 15px;
+/* PAGE 2 - PINK HEART */
+
+#page2 {
+    background-image:
+        url("images/pink-heart.jpg");
 }
 
-.brand span {
-color: white;
+/* PAGE 3 - ROSE GLOW */
+
+#page3 {
+    background-image:
+        url("images/rose-glow.jpg");
 }
 
-.screen {
-min-height: 78vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 30px 18px;
-animation: fadeIn .8s ease;
+/* PAGE 4 - BIRTHDAY WISHES */
+
+#page4 {
+    background-image:
+        url("images/pink-heart.jpg");
 }
 
-@keyframes fadeIn {
-from {
-opacity: 0;
-transform: translateY(20px);
-}
-to {
-opacity: 1;
-transform: translateY(0);
-}
+/* PAGE 5 - VIDEO */
+
+#page5 {
+    background-image:
+        url("images/dreamy-love.jpg");
 }
 
-.ornament {
-color: #edc86b;
-font-size: 24px;
-margin-bottom: 22px;
-animation: ornamentGlow 2s infinite alternate;
+/* PAGE 6 - GIFT */
+
+#page6 {
+    background-image:
+        url("images/rose-glow.jpg");
 }
 
-@keyframes ornamentGlow {
-from { text-shadow: 0 0 5px #e7b94c; }
-to { text-shadow: 0 0 20px #ffd76c; }
+/* PAGE 7 - FEEDBACK */
+
+#page7 {
+    background-image:
+        url("images/purple-hearts.jpg");
 }
 
-.eyebrow {
-color: #e9c36b;
-font-size: 11px;
-letter-spacing: 3px;
-margin-bottom: 20px;
+
+/* ==========================================
+   05. DARK CINEMATIC OVERLAY
+========================================== */
+
+.page::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 0, 20, 0.48),
+            rgba(20, 0, 25, 0.30),
+            rgba(0, 0, 0, 0.65)
+        );
+}
+
+
+/* ==========================================
+   06. MOVING BACKGROUND GLOW
+========================================== */
+
+.page::after {
+    content: "";
+
+    position: absolute;
+    inset: -30%;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 70, 180, 0.28),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(140, 60, 255, 0.28),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 180, 220, 0.10),
+            transparent 45%
+        );
+
+    background-size: 200% 200%;
+
+    animation: backgroundGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundGlow {
+    0% {
+        background-position: 0% 0%;
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    100% {
+        background-position: 100% 100%;
+        opacity: 1;
+        transform: scale(1.12);
+    }
+}
+
+
+/* Keep content above overlays */
+
+.page > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ==========================================
+   07. TYPOGRAPHY
+========================================== */
+
+h1,
+h2,
+h3 {
+    font-family: 'Playfair Display', serif;
 }
 
 h1 {
-font-family: 'Playfair Display', serif;
-font-size: clamp(35px, 8vw, 53px);
-line-height: 1.3;
-color: #fff2d2;
+    font-size: clamp(38px, 10vw, 72px);
+    font-weight: 700;
 }
 
-h1 em {
-color: #edc66a;
-font-style: italic;
+h2 {
+    font-size: clamp(27px, 7vw, 43px);
+    font-weight: 600;
+    margin: 14px 0;
 }
 
-.intro {
-max-width: 480px;
-line-height: 2;
-font-size: 14px;
-color: #e2cdb4;
-margin: 20px auto;
+p {
+    font-size: 14px;
+    line-height: 1.9;
 }
 
-.start-icon,
-.lock-icon {
-font-size: 65px;
-margin: 25px 0;
-animation: giftFloat 2s ease-in-out infinite;
+.sub-title {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 4px;
+    font-weight: 500;
+    margin-bottom: 15px;
 }
 
-@keyframes giftFloat {
-50% {
-transform: translateY(-12px) rotate(5deg);
-}
-}
-
-.form-stack {
-width: 100%;
-max-width: 420px;
-display: flex;
-flex-direction: column;
-gap: 14px;
-margin-top: 20px;
+.small-text {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 20px;
 }
 
-input, textarea {
-width: 100%;
-padding: 15px;
-border: 1px solid #a77b3b;
-border-radius: 10px;
-background: #291316;
-color: white;
-font-size: 15px;
-font-family: inherit;
-outline: none;
+
+/* ==========================================
+   08. GLOWING TITLE
+========================================== */
+
+.glow-title {
+    color: #ffd4e9;
+
+    text-shadow:
+        0 0 5px #ffffff,
+        0 0 12px #ff69b4,
+        0 0 25px #ff1493,
+        0 0 45px #c026d3,
+        0 0 70px #9333ea;
+
+    animation: titleGlow 2.5s ease-in-out infinite alternate;
 }
 
-textarea {
-resize: vertical;
+@keyframes titleGlow {
+    0% {
+        filter: brightness(0.9);
+        text-shadow:
+            0 0 5px #fff,
+            0 0 15px #ff69b4,
+            0 0 25px #ff1493;
+    }
+
+    100% {
+        filter: brightness(1.3);
+        text-shadow:
+            0 0 10px #fff,
+            0 0 25px #ff69b4,
+            0 0 45px #ff1493,
+            0 0 75px #a855f7;
+    }
 }
 
-input:focus, textarea:focus {
-border-color: #f1ce72;
-box-shadow: 0 0 12px #d7a84755;
+
+/* ==========================================
+   09. GLASSMORPHISM CARD
+========================================== */
+
+.glass-card {
+    width: min(100%, 430px);
+
+    padding: 25px 20px;
+
+    border-radius: 25px;
+
+    background: rgba(18, 5, 27, 0.58);
+
+    border: 1px solid rgba(255, 160, 220, 0.65);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 0 15px rgba(255, 70, 180, 0.35),
+        0 0 35px rgba(160, 70, 255, 0.22),
+        inset 0 0 20px rgba(255, 255, 255, 0.06);
+
+    animation: cardGlow 3s infinite alternate;
 }
 
-.gold-button {
-width: 100%;
-max-width: 420px;
-padding: 16px;
-border: none;
-border-radius: 10px;
-background: linear-gradient(120deg, #a46b1b, #f2d27b, #c28a32);
-color: #32150a;
-font-weight: 700;
-font-size: 14px;
-cursor: pointer;
-transition: .3s;
-box-shadow: 0 5px 25px #d9a94322;
+@keyframes cardGlow {
+    from {
+        box-shadow:
+            0 0 12px #ff69b455,
+            inset 0 0 10px #ffffff08;
+    }
+
+    to {
+        box-shadow:
+            0 0 30px #ff69b477,
+            0 0 45px #a855f755,
+            inset 0 0 20px #ffffff15;
+    }
 }
 
-.gold-button:hover {
-transform: translateY(-3px);
-box-shadow: 0 8px 30px #e4b94c66;
+
+/* ==========================================
+   10. BUTTON DESIGN
+========================================== */
+
+button {
+    cursor: pointer;
+
+    font-family: inherit;
+
+    border: none;
+    outline: none;
+
+    border-radius: 50px;
+
+    padding: 14px 24px;
+
+    margin: 9px 5px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
 }
 
-.gold-button:active {
-transform: scale(.96);
+button:active {
+    transform: scale(0.90);
 }
 
-.gold-button:disabled {
-opacity: .6;
-cursor: wait;
+
+/* MAIN BUTTON */
+
+.main-btn {
+    color: #541039;
+
+    background:
+        linear-gradient(
+            120deg,
+            #fff0bd,
+            #ff91c8,
+            #d88aff
+        );
+
+    box-shadow:
+        0 0 10px #ff69b4,
+        0 0 25px #ff69b477,
+        inset 0 0 10px #ffffff88;
+
+    animation: buttonShine 2s infinite alternate;
 }
 
-.error-message,
-.feedback-status {
-margin-top: 15px;
-color: #ff9a9a;
-font-size: 13px;
+@keyframes buttonShine {
+    from {
+        box-shadow:
+            0 0 10px #ff69b4,
+            0 0 20px #ff69b477;
+    }
+
+    to {
+        box-shadow:
+            0 0 20px #ffb6dc,
+            0 0 40px #ff1493,
+            0 0 55px #a855f7;
+    }
 }
 
-.tiny-note {
-color: #b9a58b;
-font-size: 12px;
-margin-top: 22px;
-line-height: 1.8;
+.main-btn:hover {
+    transform: scale(1.06);
 }
 
-.date-line {
-color: #e8c36d;
-letter-spacing: 2px;
-font-size: 12px;
-margin-top: 25px;
+
+/* SECONDARY BUTTON */
+
+.secondary-btn {
+    color: white;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid #ff9ed5;
+
+    box-shadow:
+        0 0 10px #ff69b444;
 }
 
-.countdown-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 10px;
-width: 100%;
-max-width: 450px;
-margin-top: 35px;
+
+/* ==========================================
+   11. MUSIC BUTTON
+========================================== */
+
+#musicBtn {
+    position: fixed;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 100;
+
+    color: white;
+
+    background: rgba(30, 5, 35, 0.75);
+
+    border: 1px solid #ff9ed5;
+
+    box-shadow: 0 0 15px #ff69b477;
+
+    font-size: 11px;
+
+    padding: 10px 16px;
+}
+
+
+/* ==========================================
+   12. PAGE 1 - START PAGE
+========================================== */
+
+#page1 {
+    background-position: center;
+}
+
+#page1 .glow-circle {
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 60, 170, 0.25);
+
+    filter: blur(65px);
+
+    animation: circlePulse 4s infinite alternate;
+}
+
+@keyframes circlePulse {
+    from {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+#page1 .floating-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 22px;
+
+    margin: 30px 0;
+}
+
+.floating-icons span {
+    display: inline-block;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    filter: drop-shadow(0 0 10px #ff69b4);
+
+    animation: floatIcon 2.5s ease-in-out infinite;
+}
+
+.floating-icons span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.floating-icons span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.floating-icons span:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.floating-icons span:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(12deg);
+    }
+}
+
+
+/* ==========================================
+   13. PAGE 2 - COUNTDOWN
+========================================== */
+
+.countdown {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin: 25px 0;
 }
 
 .time-box {
-background: linear-gradient(145deg, #4b1820, #271014);
-border: 1px solid #bd934c;
-border-radius: 12px;
-padding: 20px 5px;
-box-shadow: 0 0 20px #d9a94318;
+    min-width: 70px;
+
+    padding: 15px 9px;
+
+    border-radius: 16px;
+
+    background: rgba(20, 5, 30, 0.65);
+
+    border: 1px solid #ff9ed5;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 0 12px #ff69b455,
+        inset 0 0 12px #ffffff08;
 }
 
 .time-box strong {
-display: block;
-font-size: 29px;
-color: #f7d477;
+    display: block;
+
+    color: #ffe3a5;
+
+    font-size: 26px;
+
+    text-shadow:
+        0 0 8px gold,
+        0 0 18px #ff69b4;
 }
 
 .time-box span {
-font-size: 10px;
-color: #e8d2a9;
-text-transform: uppercase;
-}
+    display: block;
 
-.music-button {
-position: fixed;
-top: 14px;
-right: 12px;
-z-index: 100;
-border: 1px solid #f2d27b;
-border-radius: 30px;
-padding: 11px 16px;
-background: #650d16;
-color: #f4d47a;
-font-size: 12px;
-font-weight: bold;
-cursor: pointer;
-box-shadow: 0 4px 15px #0008;
-}
+    font-size: 9px;
 
-.music-button.playing {
-background: #f4d47a;
-color: #650d16;
+    letter-spacing: 1px;
+
+    color: #ffc1e0;
 }
 
 
-/* ROSE SCRATCH */
+/* ==========================================
+   14. PAGE 3 - PASSWORD
+========================================== */
 
-.rose-wrap {
-width: 280px;
-height: 330px;
-position: relative;
-margin: 25px auto;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: crosshair;
-touch-action: pan-y;
-user-select: none;
--webkit-user-select: none;
+#page3 .big-emoji {
+    font-size: 55px;
+
+    margin-bottom: 12px;
+
+    filter: drop-shadow(0 0 15px #ff69b4);
+
+    animation: lockGlow 2s infinite alternate;
 }
 
-.rose-art {
-width: 100%;
-height: 100%;
-filter: drop-shadow(0 10px 20px #d21b3d66);
-animation: roseFloat 3s ease-in-out infinite;
-transition: .8s;
-}
-
-@keyframes roseFloat {
-0%, 100% {
-transform: translateY(0) rotate(-2deg);
-}
-50% {
-transform: translateY(-12px) rotate(2deg);
-}
-}
-
-.rose-wrap.revealed .rose-art {
-transform: scale(.1) rotate(360deg);
-opacity: 0;
-}
-
-.rose-glitter {
-position: absolute;
-inset: 20px;
-color: #ffd978;
-font-size: 22px;
-pointer-events: none;
-animation: glitter 2s infinite;
-}
-
-@keyframes glitter {
-0%, 100% {
-opacity: .3;
-transform: scale(.8);
-}
-50% {
-opacity: 1;
-transform: scale(1.2);
-}
-}
-
-.swipe-hint {
-position: absolute;
-bottom: 0;
-color: #f1ce72;
-font-size: 11px;
-letter-spacing: 2px;
-animation: pulse 1.5s infinite;
-pointer-events: none;
-}
-
-@keyframes pulse {
-50% { opacity: .35; }
-}
-
-.slash-line {
-position: absolute;
-width: 0;
-height: 5px;
-background: #ffe08a;
-border-radius: 10px;
-transform: rotate(-25deg);
-box-shadow: 0 0 20px #ffdc70;
-pointer-events: none;
-}
-
-.rose-wrap.revealed .slash-line {
-width: 300px;
-transition: .4s;
-}
-
-#scratchTrail {
-position: absolute;
-inset: 0;
-pointer-events: none;
-}
-
-.scratch-star {
-position: absolute;
-color: #ffe48d;
-font-size: 19px;
-pointer-events: none;
-animation: scratchSpark .7s forwards;
-}
-
-@keyframes scratchSpark {
-to {
-transform: translateY(-40px) scale(0);
-opacity: 0;
-}
+@keyframes lockGlow {
+    to {
+        transform: scale(1.12);
+        filter: drop-shadow(0 0 25px #ff1493);
+    }
 }
 
 
-/* PETALS */
+/* ==========================================
+   15. INPUT FIELDS
+========================================== */
 
-.flying-petal {
-position: fixed;
-z-index: 150;
-pointer-events: none;
-font-size: 27px;
-animation: petalFly 1.8s ease-out forwards;
-}
+input,
+textarea {
+    width: 100%;
 
-@keyframes petalFly {
-0% {
-transform: translate(0,0) rotate(0) scale(.5);
-opacity: 1;
-}
-100% {
-transform: translate(var(--x),var(--y))
-rotate(500deg) scale(1.5);
-opacity: 0;
-}
-}
+    padding: 14px;
 
+    margin: 10px 0;
 
-/* BIRTHDAY MESSAGE */
+    color: white;
 
-.birthday-message {
-width: 100%;
-max-width: 540px;
-margin: 20px auto;
-padding: 35px 23px;
-border: 1px solid #bc9148;
-border-radius: 20px;
-background: linear-gradient(145deg, #3b151b, #1c0c0e);
-text-align: center;
-box-shadow: 0 15px 45px #0007;
-animation: messageAppear 1.2s ease;
+    font-family: inherit;
+    font-size: 14px;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    border: 1px solid rgba(255, 160, 220, 0.6);
+
+    border-radius: 13px;
+
+    outline: none;
+
+    transition: 0.3s;
 }
 
-@keyframes messageAppear {
-from {
-opacity: 0;
-transform: scale(.75) translateY(40px);
-}
-to {
-opacity: 1;
-transform: scale(1) translateY(0);
-}
+input:focus,
+textarea:focus {
+    border-color: #ff69b4;
+
+    box-shadow:
+        0 0 10px #ff69b4,
+        0 0 20px #ff149344;
 }
 
-.gold-divider {
-width: 90px;
-height: 2px;
-background: #edc66a;
-margin: 25px auto;
-}
-
-.wish-text {
-line-height: 2.2;
-font-size: 14px;
-color: #f3dfbd;
-margin-top: 25px;
-}
-
-.signature {
-margin: 25px;
-color: #edc66a;
-font-family: 'Playfair Display', serif;
-}
-
-.field-label {
-text-align: left;
-font-size: 13px;
-color: #e7c675;
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.65);
 }
 
 
-/* FLOATING EMOJI */
+/* ==========================================
+   16. PAGE 4 - BIRTHDAY WISHES
+========================================== */
 
-#floatingEffects {
-position: fixed;
-inset: 0;
-pointer-events: none;
-overflow: hidden;
-z-index: 50;
+#page4 {
+    background-position: center;
 }
 
-.float-emoji {
-position: absolute;
-bottom: -50px;
-pointer-events: auto;
-cursor: pointer;
-animation: floatUp linear forwards;
-filter: drop-shadow(0 0 5px #ffcc55);
-user-select: none;
-}
+#typedText {
+    width: 100%;
+    max-width: 390px;
 
-@keyframes floatUp {
-to {
-transform: translateY(-110vh) rotate(360deg);
-opacity: .1;
-}
-}
+    min-height: 180px;
 
+    margin: 18px auto;
 
-/* EMOJI EXPLOSION */
+    color: #fff1f8;
 
-.burst-particle {
-position: fixed;
-z-index: 200;
-pointer-events: none;
-font-size: 22px;
-animation: burst 850ms ease-out forwards;
-}
+    font-size: 14px;
 
-@keyframes burst {
-0% {
-transform: translate(0,0) scale(.3);
-opacity: 1;
-}
-100% {
-transform: translate(var(--x),var(--y)) scale(1.4) rotate(180deg);
-opacity: 0;
-}
+    line-height: 2;
+
+    white-space: pre-line;
+
+    text-shadow:
+        0 0 8px #ff69b4,
+        0 0 15px #a855f7;
 }
 
 
-/* GOLD PARTICLES */
+/* ==========================================
+   17. PAGE 5 - VIDEO
+========================================== */
 
-.gold-particle {
-position: fixed;
-width: 5px;
-height: 5px;
-border-radius: 50%;
-background: #ffdc75;
-box-shadow: 0 0 12px #ffdc75;
-pointer-events: none;
-z-index: 140;
-animation: goldFly 1s ease-out forwards;
+#page5 {
+    background-color: #050208;
+
+    background-position: center;
+
+    padding: 12px;
 }
 
-@keyframes goldFly {
-to {
-transform: translate(var(--x),var(--y)) scale(0);
-opacity: 0;
-}
+.video-heading {
+    font-family: 'Playfair Display', serif;
+
+    color: #ffc4e1;
+
+    font-size: 18px;
+
+    text-shadow:
+        0 0 10px #ff69b4,
+        0 0 25px #ff1493;
+
+    margin: 12px 0;
 }
 
-footer {
-text-align: center;
-padding: 25px 5px;
-font-size: 10px;
-color: #a89172;
-letter-spacing: 1px;
+#birthdayVideo {
+    display: block;
+
+    width: min(100%, 420px);
+
+    height: min(66vh, 720px);
+
+    object-fit: contain;
+
+    background: #000;
+
+    border: 1px solid #ff9ed5;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 15px #ff69b4,
+        0 0 35px #a855f7;
 }
 
-@media(max-width: 400px) {
+.video-buttons {
+    display: flex;
 
-.app-shell {
-padding: 12px;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    margin-top: 12px;
 }
 
-.countdown-grid {
-gap: 5px;
+
+/* ==========================================
+   18. PAGE 6 - GIFT BOX
+========================================== */
+
+#page6 {
+    background-position: center;
 }
 
-.time-box {
-padding: 15px 2px;
+.gift-box {
+    display: inline-block;
+
+    font-size: 115px;
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(0 0 10px #ff69b4)
+        drop-shadow(0 0 25px #ff1493);
+
+    animation: giftMove 1.5s ease-in-out infinite;
+
+    transition: 0.5s;
 }
 
-.time-box strong {
-font-size: 22px;
+@keyframes giftMove {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(6deg);
+    }
 }
 
-.rose-wrap {
-width: 250px;
-height: 300px;
+#photoReveal {
+    display: none;
+
+    width: min(100%, 420px);
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    border: 3px solid #ffb5dc;
+
+    box-shadow:
+        0 0 15px #ff69b4,
+        0 0 35px #ff1493,
+        0 0 60px #a855f766;
+
+    animation: photoReveal 1.2s ease both;
 }
 
-.music-button {
-padding: 9px 12px;
-font-size: 11px;
+@keyframes photoReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.65) rotate(-5deg);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+        filter: blur(0);
+    }
 }
 
+
+/* ==========================================
+   19. PAGE 7 - FEEDBACK
+========================================== */
+
+#page7 .glass-card {
+    max-height: 90vh;
+
+    overflow-y: auto;
 }
+
+.answer {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin: 10px 0;
+
+    text-align: left;
+
+    border: 1px solid rgba(255, 160, 220, 0.4);
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.answer:hover {
+    background: rgba(255, 105, 180, 0.18);
+
+    box-shadow: 0 0 12px #ff69b455;
+}
+
+.answer input {
+    width: 19px;
+    height: 19px;
+
+    margin: 0;
+
+    accent-color: #ff69b4;
+
+    flex-shrink: 0;
+}
+
+
+/* ==========================================
+   20. FLOATING EMOJIS
+========================================== */
+
+.floating-emoji {
+    position: fixed;
+
+    bottom: -60px;
+
+    z-index: 25;
+
+    display: inline-block;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    font-size: 25px;
+
+    filter:
+        drop-shadow(0 0 8px #ff69b4)
+        drop-shadow(0 0 15px #ff1493);
+
+    animation: emojiFloat linear forwards;
+}
+
+@keyframes emojiFloat {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.6);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-55vh) rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: translateY(-115vh) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================
+   21. TAP HEART EXPLOSION
+========================================== */
+
+.burst {
+    position: fixed;
+
+    z-index: 99;
+
+    pointer-events: none;
+
+    font-size: 23px;
+
+    filter: drop-shadow(0 0 8px #ff69b4);
+
+    animation: burstEffect 0.9s ease-out forwards;
+}
+
+@keyframes burstEffect {
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(0, 0)
+            scale(0.4);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(var(--x), var(--y))
+            scale(1.8);
+    }
+}
+
+
+/* ==========================================
+   22. SPARKLE EFFECT
+========================================== */
+
+.sparkle {
+    position: fixed;
+
+    z-index: 30;
+
+    pointer-events: none;
+
+    color: #ffe7ae;
+
+    font-size: 17px;
+
+    text-shadow:
+        0 0 8px white,
+        0 0 18px #ff69b4;
+
+    animation: sparkleFade 1.2s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+    0% {
+        opacity: 1;
+        transform: scale(0.5) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(1.8) rotate(180deg);
+    }
+}
+
+
+/* ==========================================
+   23. FORM STATUS
+========================================== */
+
+#passwordError,
+#formStatus,
+#videoError {
+    color: #ffc1e0;
+
+    font-size: 13px;
+
+    margin-top: 12px;
+
+    text-shadow: 0 0 8px #ff69b4;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* ==========================================
+   24. THANK YOU MESSAGE
+========================================== */
+
+#thankYou {
+    padding: 20px 5px;
+
+    animation: pageEnter 1s ease both;
+}
+
+#thankYou p {
+    color: #ffd4e9;
+
+    text-shadow: 0 0 12px #ff69b4;
+
+    margin: 10px 0;
+}
+
+
+/* ==========================================
+   25. RESPONSIVE MOBILE DESIGN
+========================================== */
+
+@media (max-width: 480px) {
+
+    .page {
+        padding: 20px 14px;
+    }
+
+    .glass-card {
+        padding: 22px 16px;
+    }
+
+    h1 {
+        font-size: 43px;
+    }
+
+    h2 {
+        font-size: 29px;
+    }
+
+    .countdown {
+        gap: 7px;
+    }
+
+    .time-box {
+        min-width: 65px;
+        padding: 12px 6px;
+    }
+
+    .time-box strong {
+        font-size: 23px;
+    }
+
+    .floating-icons {
+        gap: 15px;
+    }
+
+    .floating-icons span {
+        font-size: 25px;
+    }
+
+    #birthdayVideo {
+        width: 100%;
+        height: 63vh;
+    }
+
+    .gift-box {
+        font-size: 100px;
+    }
+
+    #photoReveal {
+        width: 100%;
+    }
+
+    #page7 .glass-card {
+        max-height: 85dvh;
+    }
+
+}
+
+
+/* ==========================================
+   26. SMALL SCREEN SUPPORT
+========================================== */
+
+@media (max-height: 650px) {
+
+    .page {
+        justify-content: flex-start;
+        padding-top: 55px;
+        padding-bottom: 25px;
+    }
+
+    .glass-card {
+        padding: 17px;
+    }
+
+    .gift-box {
+        font-size: 85px;
+    }
+
+    #birthdayVideo {
+        height: 55vh;
+    }
+
+}
+
+
+/* ==========================================
+   27. ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+
+
+/* ==========================================
+   END OF ROYAL DIGITAL HUB CSS
+========================================== */
