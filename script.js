@@ -1,671 +1,498 @@
 
-/* ======================================
-   ROYAL DIGITAL HUB
-   BAVANI PREMIUM BIRTHDAY SURPRISE
-====================================== */
+/* =================================
+   CONFIGURATION
+================================= */
 
 const CONFIG = {
 
-  password: "04/12/2006",
+  birthday: new Date("2026-12-04T00:00:00+05:30"),
 
-  // 04 December 2026, 12 AM IST
-  birthdayDate: new Date(
-  "2026-12-03T18:30:00Z"
-).getTime(),
-   
+  password: "BAVANI123",
 
-  feedbackURL: "https://formspree.io/f/xzepljrz",
+  // Testing only. Set false before publishing.
+  previewMode: false,
 
-  musicVolume: 0.35
+  typingSpeed: 45
 
 };
 
 
-/* ELEMENTS */
+/* =================================
+   PAGE NAVIGATION
+================================= */
 
-const startScreen =
-document.getElementById("startScreen");
+function showPage(number) {
 
-const countdownScreen =
-document.getElementById("countdownScreen");
-
-const passwordScreen =
-document.getElementById("passwordScreen");
-
-const birthdayScreen =
-document.getElementById("birthdayScreen");
-
-const feedbackScreen =
-document.getElementById("feedbackScreen");
-
-const music =
-document.getElementById("backgroundMusic");
-
-const musicButton =
-document.getElementById("musicButton");
-
-
-/* SCREEN NAVIGATION */
-
-function showScreen(screen) {
-
-  [
-    startScreen,
-    countdownScreen,
-    passwordScreen,
-    birthdayScreen,
-    feedbackScreen
-  ].forEach(item => {
-
-    item.classList.add("hidden");
-
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
   });
 
-  screen.classList.remove("hidden");
+  document.getElementById("page" + number)
+    .classList.add("active");
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  if(number === 4) startTyping();
+
+  if(number === 5) playBirthdayVideo();
 
 }
 
 
-/* MUSIC */
+/* =================================
+   START
+================================= */
 
-music.volume = CONFIG.musicVolume;
+function startSurprise() {
 
-async function playMusic() {
+  const music = document.getElementById("music");
 
-  try {
+  music.play().catch(() => {});
 
-    await music.play();
+  showPage(2);
 
-    musicButton.textContent = "♫ Pause Music";
+  checkBirthday();
 
-    musicButton.classList.add("playing");
+}
 
-  } catch (error) {
 
-    musicButton.textContent = "♫ Tap to Play";
+/* =================================
+   COUNTDOWN
+================================= */
+
+function checkBirthday() {
+
+  const now = new Date();
+
+  if(CONFIG.previewMode || now >= CONFIG.birthday) {
+
+    document.getElementById("countMessage").innerText =
+      "Your special moment is here ❤️";
+
+    showPage(3);
+
+    return;
 
   }
 
+  const difference = CONFIG.birthday - now;
+
+  document.getElementById("days").innerText =
+    Math.floor(difference / 86400000);
+
+  document.getElementById("hours").innerText =
+    Math.floor((difference % 86400000) / 3600000);
+
+  document.getElementById("minutes").innerText =
+    Math.floor((difference % 3600000) / 60000);
+
+  document.getElementById("seconds").innerText =
+    Math.floor((difference % 60000) / 1000);
+
 }
 
-musicButton.addEventListener("click", async () => {
 
-  if (music.paused) {
+setInterval(() => {
 
-    await playMusic();
+  if(document.getElementById("page2").classList.contains("active")) {
+    checkBirthday();
+  }
+
+},1000);
+
+
+/* =================================
+   PASSWORD
+================================= */
+
+function checkPassword() {
+
+  const entered =
+    document.getElementById("password").value;
+
+  if(entered === CONFIG.password) {
+
+    document.getElementById("passwordError").innerText = "";
+
+    showPage(4);
 
   } else {
 
-    music.pause();
+    document.getElementById("passwordError").innerText =
+      "Wrong password! Try again ❤️";
 
-    musicButton.textContent = "♫ Play Music";
-
-    musicButton.classList.remove("playing");
+    document.getElementById("password").value = "";
 
   }
+
+}
+
+
+/* =================================
+   TYPING WISHES
+================================= */
+
+const birthdayMessage = `On your special day, I wish you endless happiness, beautiful memories and countless reasons to smile.
+
+May every dream you carry in your heart come true.
+
+உன் வாழ்க்கையில் எப்போதும் மகிழ்ச்சி நிறைந்திருக்கட்டும்.
+
+ஒவ்வொரு நாளும் புதிய நம்பிக்கையும் அழகான நினைவுகளும் உன்னைத் தேடி வரட்டும்.
+
+Keep smiling, keep shining and always be happy.
+
+You deserve all the beautiful things in life.
+
+Once again, Happy Birthday BAVANI.S! ❤️✨`;
+
+let typingStarted = false;
+
+function startTyping() {
+
+  if(typingStarted) return;
+
+  typingStarted = true;
+
+  const output = document.getElementById("typedText");
+
+  let index = 0;
+
+  function type() {
+
+    if(index < birthdayMessage.length) {
+
+      output.textContent += birthdayMessage[index];
+
+      index++;
+
+      setTimeout(type,CONFIG.typingSpeed);
+
+    } else {
+
+      document.getElementById("wishNext")
+        .style.display = "inline-block";
+
+    }
+
+  }
+
+  type();
+
+}
+
+
+/* =================================
+   VIDEO
+================================= */
+
+const video = document.getElementById("birthdayVideo");
+
+function playBirthdayVideo() {
+
+  document.getElementById("music").pause();
+
+  video.pause();
+
+  video.currentTime = 0;
+
+  video.muted = true;
+
+  video.play().catch(error => {
+
+    document.getElementById("videoError").innerText =
+      "Tap PLAY VIDEO to start ❤️";
+
+    console.log(error);
+
+  });
+
+}
+
+
+function playMyVideo() {
+
+  video.muted = true;
+
+  video.play().catch(error => {
+
+    document.getElementById("videoError").innerText =
+      "Video could not play. Check file path.";
+
+    console.log(error);
+
+  });
+
+}
+
+
+function enableVideoSound() {
+
+  video.muted = false;
+
+  video.volume = 1;
+
+  video.play().catch(error => console.log(error));
+
+}
+
+
+video.addEventListener("error",() => {
+
+  document.getElementById("videoError").innerText =
+    "Video not found. Check 219015.mp4 in GitHub.";
 
 });
 
 
-/* START BUTTON */
+function goToGift() {
 
-document.getElementById("startButton")
-.addEventListener("click", async () => {
+  video.pause();
 
-  showScreen(countdownScreen);
-
-  await playMusic();
-
-  updateCountdown();
-
-  if (!countdownFinished) {
-
-    countdownInterval = setInterval(
-      updateCountdown,
-      1000
-    );
-
-  }
-
-});
-
-
-/* COUNTDOWN */
-
-let countdownInterval = null;
-
-let countdownFinished = false;
-
-function updateCountdown() {
-
-  const now = Date.now();
-
-  const difference =
-  CONFIG.birthdayDate - now;
-
-  if (difference <= 0) {
-
-    countdownFinished = true;
-
-    clearInterval(countdownInterval);
-
-    document.getElementById("countdownStatus")
-    .textContent = "Your special day is here! ❤️";
-
-    showScreen(passwordScreen);
-
-    return;
-
-  }
-
-  const days = Math.floor(
-    difference / 86400000
-  );
-
-  const hours = Math.floor(
-    (difference % 86400000) / 3600000
-  );
-
-  const minutes = Math.floor(
-    (difference % 3600000) / 60000
-  );
-
-  const seconds = Math.floor(
-    (difference % 60000) / 1000
-  );
-
-  document.getElementById("days").textContent =
-  String(days).padStart(2, "0");
-
-  document.getElementById("hours").textContent =
-  String(hours).padStart(2, "0");
-
-  document.getElementById("minutes").textContent =
-  String(minutes).padStart(2, "0");
-
-  document.getElementById("seconds").textContent =
-  String(seconds).padStart(2, "0");
+  showPage(6);
 
 }
 
 
-/* PASSWORD */
+/* =================================
+   GIFT BOX
+================================= */
 
-document.getElementById("passwordForm")
-.addEventListener("submit", async event => {
+let giftOpened = false;
 
-  event.preventDefault();
+function openGift() {
 
-  const entered =
-  document.getElementById("passwordInput")
-  .value.trim();
+  if(giftOpened) return;
 
-  const error =
-  document.getElementById("passwordError");
+  giftOpened = true;
 
-  if (entered !== CONFIG.password) {
+  const gift = document.getElementById("giftBox");
 
-    error.textContent =
-    "Incorrect password! Try again ❤️";
-
-    return;
-
-  }
-
-  error.textContent = "";
-
-  showScreen(birthdayScreen);
-
-});
-
-
-/* ROSE SCRATCH EFFECT */
-
-const rose =
-document.getElementById("roseWrap");
-
-const roseStage =
-document.getElementById("roseStage");
-
-const birthdayMessage =
-document.getElementById("birthdayMessage");
-
-const slashStatus =
-document.getElementById("slashStatus");
-
-const scratchTrail =
-document.getElementById("scratchTrail");
-
-let startX = 0;
-
-let startY = 0;
-
-let isDragging = false;
-
-let roseOpened = false;
-
-let scratchProgress = 0;
-
-
-/* SPARKLE CREATION */
-
-function createScratchSpark(x, y) {
-
-  const star = document.createElement("span");
-
-  star.className = "scratch-star";
-
-  star.textContent =
-  Math.random() > 0.5 ? "✨" : "✦";
-
-  star.style.left = x + "px";
-
-  star.style.top = y + "px";
-
-  scratchTrail.appendChild(star);
-
-  setTimeout(() => star.remove(), 750);
-
-}
-
-
-/* ROSE PETALS */
-
-function createRosePetals() {
-
-  const petals = [
-    "🌹", "🌸", "🌺", "💮", "🌷", "✨"
-  ];
-
-  for (let i = 0; i < 35; i++) {
-
-    const petal =
-    document.createElement("span");
-
-    petal.className = "flying-petal";
-
-    petal.textContent =
-    petals[Math.floor(Math.random() * petals.length)];
-
-    petal.style.left =
-    (45 + Math.random() * 15) + "vw";
-
-    petal.style.top =
-    (35 + Math.random() * 25) + "vh";
-
-    petal.style.setProperty(
-      "--x",
-      (Math.random() - 0.5) * 550 + "px"
-    );
-
-    petal.style.setProperty(
-      "--y",
-      (-100 - Math.random() * 450) + "px"
-    );
-
-    document.body.appendChild(petal);
-
-    setTimeout(() => petal.remove(), 2000);
-
-  }
-
-}
-
-
-/* GOLDEN EXPLOSION */
-
-function createGoldenExplosion() {
-
-  for (let i = 0; i < 45; i++) {
-
-    const particle =
-    document.createElement("span");
-
-    particle.className = "gold-particle";
-
-    particle.style.left = "50vw";
-
-    particle.style.top = "45vh";
-
-    particle.style.setProperty(
-      "--x",
-      (Math.random() - 0.5) * 500 + "px"
-    );
-
-    particle.style.setProperty(
-      "--y",
-      (Math.random() - 0.5) * 500 + "px"
-    );
-
-    document.body.appendChild(particle);
-
-    setTimeout(() => particle.remove(), 1100);
-
-  }
-
-}
-
-
-/* REVEAL BIRTHDAY */
-
-function revealBirthday() {
-
-  if (roseOpened) return;
-
-  roseOpened = true;
-
-  rose.classList.add("revealed");
-
-  slashStatus.textContent =
-  "A beautiful wish is waiting for you... ❤️";
-
-  createRosePetals();
-
-  createGoldenExplosion();
+  gift.style.transform = "scale(1.5) rotate(20deg)";
 
   setTimeout(() => {
 
-    roseStage.classList.add("hidden");
+    gift.style.display = "none";
 
-    birthdayMessage.classList.remove("hidden");
+    document.getElementById("giftHint").innerText =
+      "A special memory, just for you ❤️";
 
-    createRosePetals();
+    document.getElementById("photoReveal").style.display = "block";
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    document.getElementById("photoText").style.display = "block";
 
-  }, 850);
+    document.getElementById("photoNext").style.display = "inline-block";
+
+    createBurst(window.innerWidth/2,window.innerHeight/2);
+
+  },500);
 
 }
 
 
-/* POINTER SWIPE */
-
-rose.addEventListener("pointerdown", event => {
-
-  if (roseOpened) return;
-
-  startX = event.clientX;
-
-  startY = event.clientY;
-
-  isDragging = true;
-
-  rose.setPointerCapture(event.pointerId);
-
-});
-
-
-rose.addEventListener("pointermove", event => {
-
-  if (!isDragging || roseOpened) return;
-
-  const rect = rose.getBoundingClientRect();
-
-  const x = event.clientX - rect.left;
-
-  const y = event.clientY - rect.top;
-
-  createScratchSpark(x, y);
-
-});
-
-
-rose.addEventListener("pointerup", event => {
-
-  if (!isDragging || roseOpened) return;
-
-  isDragging = false;
-
-  const distanceX =
-  event.clientX - startX;
-
-  const distanceY =
-  Math.abs(event.clientY - startY);
-
-  if (distanceX > 45 && distanceX > distanceY) {
-
-    scratchProgress += distanceX;
-
-    if (scratchProgress >= 70) {
-
-      revealBirthday();
-
-    }
-
-  } else {
-
-    slashStatus.textContent =
-    "Swipe from left to right to open the rose ✨";
-
-  }
-
-});
-
-
-rose.addEventListener("pointercancel", () => {
-
-  isDragging = false;
-
-});
-
-
-/* KEYBOARD ACCESS */
-
-rose.addEventListener("keydown", event => {
-
-  if (
-    event.key === "Enter" ||
-    event.key === " "
-  ) {
-
-    event.preventDefault();
-
-    revealBirthday();
-
-  }
-
-});
-
-
-/* FEEDBACK PAGE */
-
-document.getElementById("toFeedbackButton")
-.addEventListener("click", () => {
-
-  showScreen(feedbackScreen);
-
-});
-
-
-/* FEEDBACK SUBMISSION */
-
-document.getElementById("feedbackForm")
-.addEventListener("submit", async event => {
-
-  event.preventDefault();
-
-  const form = event.currentTarget;
-
-  const button =
-  document.getElementById("sendFeedbackButton");
-
-  const status =
-  document.getElementById("feedbackStatus");
-
-  if (!form.reportValidity()) return;
-
-  button.disabled = true;
-
-  button.textContent = "Sending...";
-
-  status.textContent = "";
-
-  const data = new FormData(form);
-
-  data.append(
-    "website",
-    "BAVANI Birthday Surprise"
-  );
-
-  data.append(
-    "date",
-    new Date().toLocaleString("en-IN")
-  );
-
-  try {
-
-    const response = await fetch(
-      CONFIG.feedbackURL,
-      {
-        method: "POST",
-        body: data,
-        headers: {
-          Accept: "application/json"
-        }
-      }
-    );
-
-    if (!response.ok) {
-
-      throw new Error("Submission failed");
-
-    }
-
-    status.textContent =
-    "Thank you! Your feedback has been sent privately. ❤️";
-
-    status.style.color = "#f2d27b";
-
-    form.reset();
-
-    button.textContent = "Feedback Sent ✓";
-
-  } catch (error) {
-
-    status.textContent =
-    "Unable to send. Please check your internet and try again.";
-
-    status.style.color = "#ff9999";
-
-    button.disabled = false;
-
-    button.textContent = "Send Feedback ➤";
-
-  }
-
-});
-
-
-/* FLOATING EMOJI EFFECT */
-
-const floatingEffects =
-document.getElementById("floatingEffects");
-
-const emojis = [
-  "❤️", "💛", "💖", "✨", "🌹",
-  "💕", "🌸", "💗", "🦋"
+/* =================================
+   FLOATING EMOJI ANIMATION
+================================= */
+
+const emojiList = [
+  "❤️","💕","💗","💖","🌹",
+  "🦋","✨","💝","🌸","💫"
 ];
-
-
-/* EMOJI EXPLOSION ON TAP */
-
-function explodeEmoji(x, y) {
-
-  const particles = [
-    "❤️", "💖", "✨", "🌟",
-    "💕", "🌸", "💛", "🎉"
-  ];
-
-  for (let i = 0; i < 14; i++) {
-
-    const particle =
-    document.createElement("span");
-
-    particle.className = "burst-particle";
-
-    particle.textContent =
-    particles[Math.floor(Math.random() * particles.length)];
-
-    particle.style.left = x + "px";
-
-    particle.style.top = y + "px";
-
-    particle.style.setProperty(
-      "--x",
-      (Math.random() - 0.5) * 180 + "px"
-    );
-
-    particle.style.setProperty(
-      "--y",
-      (Math.random() - 0.5) * 180 + "px"
-    );
-
-    document.body.appendChild(particle);
-
-    setTimeout(() => particle.remove(), 900);
-
-  }
-
-}
-
-
-/* CREATE FLOATING EMOJI */
 
 function createFloatingEmoji() {
 
-  const emoji =
-  document.createElement("span");
+  const emoji = document.createElement("span");
 
-  emoji.className = "float-emoji";
+  emoji.className = "floating-emoji";
 
   emoji.textContent =
-  emojis[Math.floor(Math.random() * emojis.length)];
+    emojiList[Math.floor(Math.random()*emojiList.length)];
 
-  emoji.style.left =
-  Math.random() * 95 + "vw";
-
-  emoji.style.fontSize =
-  (18 + Math.random() * 17) + "px";
+  emoji.style.left = Math.random()*95 + "vw";
 
   emoji.style.animationDuration =
-  (7 + Math.random() * 6) + "s";
+    (5 + Math.random()*5) + "s";
 
-  floatingEffects.appendChild(emoji);
+  emoji.style.fontSize =
+    (20 + Math.random()*18) + "px";
 
-  emoji.addEventListener("click", event => {
+  emoji.addEventListener("click",function(e) {
 
-    event.stopPropagation();
+    e.stopPropagation();
 
-    const rect = emoji.getBoundingClientRect();
-
-    explodeEmoji(
-      rect.left + rect.width / 2,
-      rect.top + rect.height / 2
-    );
+    createBurst(e.clientX,e.clientY);
 
     emoji.remove();
 
   });
 
-  setTimeout(() => emoji.remove(), 14000);
+  document.body.appendChild(emoji);
+
+  setTimeout(() => emoji.remove(),11000);
+
+}
+
+setInterval(createFloatingEmoji,650);
+
+
+/* =================================
+   TAP HEART EXPLOSION
+================================= */
+
+function createBurst(x,y) {
+
+  const effects = [
+    "❤️","💕","✨","💗","🌹","💖","🦋"
+  ];
+
+  for(let i=0;i<9;i++) {
+
+    const item = document.createElement("span");
+
+    item.className = "burst";
+
+    item.textContent =
+      effects[Math.floor(Math.random()*effects.length)];
+
+    item.style.left = x + "px";
+
+    item.style.top = y + "px";
+
+    item.style.setProperty("--x",
+      (Math.random()*180-90) + "px");
+
+    item.style.setProperty("--y",
+      (Math.random()*180-90) + "px");
+
+    document.body.appendChild(item);
+
+    setTimeout(() => item.remove(),900);
+
+  }
 
 }
 
 
-/* GENERATE EMOJIS */
+/* Tap anywhere for small sparkle */
 
-setInterval(createFloatingEmoji, 900);
+document.addEventListener("click",function(e) {
+
+  const sparkle = document.createElement("span");
+
+  sparkle.className = "sparkle";
+
+  sparkle.textContent = "✦";
+
+  sparkle.style.left = e.clientX + "px";
+
+  sparkle.style.top = e.clientY + "px";
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(),1300);
+
+});
 
 
-/* INITIAL STATE */
+/* =================================
+   BACKGROUND MUSIC
+================================= */
 
-showScreen(startScreen);
-                  
+function toggleMusic() {
+
+  const music = document.getElementById("music");
+
+  if(music.paused) {
+
+    music.play().then(() => {
+
+      document.getElementById("musicBtn").innerText =
+        "♫ MUSIC ON";
+
+    }).catch(() => {
+
+      document.getElementById("musicBtn").innerText =
+        "♫ TAP AGAIN";
+
+    });
+
+  } else {
+
+    music.pause();
+
+    document.getElementById("musicBtn").innerText =
+      "♫ MUSIC OFF";
+
+  }
+
+}
+
+
+/* =================================
+   FORMSPREE FEEDBACK
+================================= */
+
+const feedbackForm =
+  document.getElementById("feedbackForm");
+
+feedbackForm.addEventListener("submit",async function(e) {
+
+  e.preventDefault();
+
+  const button = document.getElementById("submitBtn");
+
+  const status = document.getElementById("formStatus");
+
+  button.disabled = true;
+
+  button.innerText = "SENDING...";
+
+  try {
+
+    const response = await fetch(feedbackForm.action, {
+
+      method:"POST",
+
+      body:new FormData(feedbackForm),
+
+      headers: {
+        "Accept":"application/json"
+      }
+
+    });
+
+    if(response.ok) {
+
+      feedbackForm.style.display = "none";
+
+      document.getElementById("thankYou").style.display = "block";
+
+      status.innerText = "Response sent successfully ❤️";
+
+    } else {
+
+      status.innerText = "Unable to send. Try again.";
+
+      button.disabled = false;
+
+      button.innerText = "TRY AGAIN ❤️";
+
+    }
+
+  } catch(error) {
+
+    status.innerText = "Internet connection error.";
+
+    button.disabled = false;
+
+    button.innerText = "TRY AGAIN ❤️";
+
+  }
+
+});
+
+
+/* =================================
+   INITIALIZATION
+================================= */
+
+document.getElementById("musicBtn").innerText = "♫ MUSIC";
+
