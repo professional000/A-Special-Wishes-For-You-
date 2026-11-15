@@ -16,7 +16,7 @@ const CONFIG = Object.freeze({
 
     // false = Real countdown
     // true = Testing mode
-    previewMode: true,
+    previewMode: false,
 
     typingSpeed: 32,
 
