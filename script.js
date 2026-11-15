@@ -12,11 +12,11 @@ const CONFIG = Object.freeze({
 
     birthday: new Date("2026-12-04T00:00:00+05:30"),
 
-    password: "04/12/2006",
+    password: "BAVANI123",
 
     // false = Real countdown
     // true = Testing mode
-    previewMode: false,
+    previewMode: true,
 
     typingSpeed: 32,
 
