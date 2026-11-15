@@ -10,9 +10,9 @@ const CONFIG = {
   password: "BAVANI123",
 
   // Testing only. Set false before publishing.
-  previewMode: false,
+  previewMode: true,
 
-  typingSpeed: 45
+  typingSpeed: 30
 
 };
 
