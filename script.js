@@ -12,7 +12,7 @@ const CONFIG = {
   // Testing only. Set false before publishing.
   previewMode: true,
 
-  typingSpeed: 30
+  typingSpeed: 45
 
 };
 
