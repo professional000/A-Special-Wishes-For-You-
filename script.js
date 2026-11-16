@@ -5,7 +5,7 @@
 
 /* SETTINGS */
 const CONFIG = Object.freeze({
-  birthday: new Date("2026-12-04T00:00:00+05:30"),
+  birthday: new Date(Date.now() + 30000),
   password: "BAVANI123",
   typingSpeed: 32,
   dustInterval: 180,
