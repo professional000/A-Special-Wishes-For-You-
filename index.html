@@ -2,334 +2,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#16091e">
-<meta name="description" content="A special birthday surprise for BAVANI.S">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080706">
+  <meta name="description" content="A special golden birthday surprise for BAVANI.S">
+  <title>Happy Birthday BAVANI.S ❤️</title>
 
-<title>Happy Birthday BAVANI.S ❤️</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-
-<div id="particles" aria-hidden="true"></div>
-
-<button id="musicBtn" class="music-btn" type="button">
-♫ MUSIC OFF
-</button>
-
-<audio id="music" loop preload="none">
-<source src="./birthday-music.mp3" type="audio/mpeg">
-</audio>
-
-<!-- PAGE 1 -->
-
-<section class="page active" id="page1">
-
-<div class="glow-circle"></div>
-
-<p class="sub-title">A SPECIAL SURPRISE FOR</p>
-
-<h1 class="glow-title hero-name">BAVANI.S</h1>
-
-<p class="intro">
-Some moments are special.<br>
-Some people make them unforgettable.
-</p>
-
-<div class="floating-icons">
-<span>❤️</span>
-<span>🌹</span>
-<span>🦋</span>
-<span>✨</span>
-<span>💕</span>
-</div>
-
-<button class="main-btn" id="startBtn">
-START SURPRISE ✨
-</button>
-
-<p class="small-text">Made with love ❤️</p>
-
-</section>
-
-
-<!-- PAGE 2 COUNTDOWN -->
-
-<section class="page" id="page2">
-
-<p class="sub-title">THE SPECIAL MOMENT</p>
-
-<h2 class="glow-title">
-Something Beautiful Is Waiting
-</h2>
-
-<p>December 04, 2026 | 12:00 AM (IST)</p>
-
-<div class="countdown">
-
-<div class="time-box">
-<strong id="days">00</strong>
-<span>DAYS</span>
-</div>
-
-<div class="time-box">
-<strong id="hours">00</strong>
-<span>HOURS</span>
-</div>
-
-<div class="time-box">
-<strong id="minutes">00</strong>
-<span>MINUTES</span>
-</div>
-
-<div class="time-box">
-<strong id="seconds">00</strong>
-<span>SECONDS</span>
-</div>
-
-</div>
-
-<p id="countMessage">Your surprise is waiting ❤️</p>
-
-</section>
-
-
-<!-- PAGE 3 PASSWORD -->
-
-<section class="page" id="page3">
-
-<div class="glass-card">
-
-<div class="big-emoji">🔐</div>
-
-<h2 class="glow-title">One Little Secret</h2>
-
-<p>Enter your special password</p>
-
-<form id="passwordForm">
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password"
-autocomplete="off"
-required
->
-
-<button class="main-btn" type="submit">
-UNLOCK ❤️
-</button>
-
-</form>
-
-<p id="passwordError" class="status"></p>
-
-</div>
-
-</section>
-
-
-<!-- PAGE 4 BIRTHDAY WISHES -->
-
-<section class="page" id="page4">
-
-<div class="glass-card">
-
-<p class="sub-title">DECEMBER 04 • YOUR DAY</p>
-
-<h1 class="glow-title">Happy Birthday</h1>
-
-<h2>BAVANI.S ❤️</h2>
-
-<div id="typedText"></div>
-
-<button
-id="wishNext"
-class="main-btn hidden"
-type="button">
-
-WATCH YOUR SURPRISE ✨
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- PAGE 5 VIDEO -->
-
-<section class="page video-page" id="page5">
-
-<p class="video-heading">
-A SPECIAL VIDEO FOR YOU ❤️
-</p>
-
-<video
-id="birthdayVideo"
-controls
-playsinline
-webkit-playsinline
-preload="metadata"
-poster="images/dreamy-love.jpg">
-
-<source src="./219015.mp4" type="video/mp4">
-
-Your browser does not support HTML video.
-
-</video>
-
-<div class="video-buttons">
-
-<button class="main-btn" id="playVideoBtn">
-▶ PLAY VIDEO
-</button>
-
-<button class="secondary-btn" id="soundVideoBtn">
-🔊 SOUND ON
-</button>
-
-<button class="secondary-btn" id="nextGiftBtn">
-NEXT SURPRISE ❤️
-</button>
-
-</div>
-
-<p id="videoError" class="status"></p>
-
-</section>
-
-
-<!-- PAGE 6 GIFT -->
-
-<section class="page" id="page6">
-
-<p class="sub-title">A LITTLE GIFT</p>
-
-<h2 class="glow-title">Open Your Gift 🎁</h2>
-
-<p id="giftHint">Tap the gift box ❤️</p>
-
-<button
-id="giftBox"
-class="gift-box"
-type="button">
-
-🎁
-
-</button>
-
-<img
-id="photoReveal"
-src="./gift-photo.jpg"
-alt="Special Birthday Memory"
-loading="lazy"
->
-
-<p id="photoText" class="hidden">
-A little memory, specially for you ❤️
-</p>
-
-<button
-id="photoNext"
-class="main-btn hidden">
-
-ONE LAST THING 💌
-
-</button>
-
-</section>
-
-
-<!-- PAGE 7 FEEDBACK -->
-
-<section class="page" id="page7">
-
-<div class="glass-card feedback-card">
-
-<h2 class="glow-title">
-One Last Question ❤️
-</h2>
-
-<p>How do you feel about this surprise?</p>
-
-<form
-id="feedbackForm"
-action="https://formspree.io/f/xzepljrz"
-method="POST">
-
-<label class="answer">
-<input type="radio" name="feeling"
-value="Very Happy ❤️" required>
-<span>Very Happy ❤️</span>
-</label>
-
-<label class="answer">
-<input type="radio" name="feeling"
-value="This is so special 🥹">
-<span>This is so special 🥹</span>
-</label>
-
-<label class="answer">
-<input type="radio" name="feeling"
-value="Loved it 💗">
-<span>Loved it 💗</span>
-</label>
-
-<label class="answer">
-<input type="radio" name="feeling"
-value="Beautiful surprise ✨">
-<span>Beautiful surprise ✨</span>
-</label>
-
-<textarea
-name="message"
-rows="3"
-placeholder="Write something from your heart...">
-</textarea>
-
-<input type="hidden" name="person" value="BAVANI.S">
-
-<input type="hidden" name="website"
-value="BAVANI Birthday Surprise">
-
-<button
-type="submit"
-class="main-btn"
-id="submitBtn">
-
-SEND MY FEELINGS ❤️
-
-</button>
-
-</form>
-
-<div id="thankYou" class="hidden">
-
-<h2 class="glow-title">Thank You ❤️</h2>
-
-<p>Your feelings mean a lot.</p>
-
-<p>Stay Happy. Keep Smiling. ✨</p>
-
-</div>
-
-<p id="formStatus" class="status"></p>
-
-</div>
-
-</section>
-
-
-<script src="script.js" defer></script>
-
+  <div id="goldParticles" aria-hidden="true"></div>
+  <div id="floatingHearts" aria-hidden="true"></div>
+
+  <button id="musicBtn" class="music-btn" type="button" aria-pressed="false">♫ MUSIC OFF</button>
+  <audio id="music" loop preload="none">
+    <source src="./birthday-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- PAGE 1: WELCOME -->
+  <section class="page active" id="page1" aria-hidden="false">
+    <div class="gold-orb" aria-hidden="true"></div>
+    <p class="sub-title">A SPECIAL SURPRISE FOR</p>
+    <h1 class="glow-title hero-name">BAVANI.S</h1>
+    <p class="intro">Some moments are special.<br>Some people make them unforgettable.</p>
+
+    <div class="floating-icons" aria-hidden="true">
+      <span>✨</span><span>❤️</span><span>🌹</span><span>🦋</span><span>✨</span>
+    </div>
+
+    <button class="main-btn" id="startBtn" type="button">START SURPRISE ✨</button>
+    <p class="small-text">Made with love ❤️</p>
+    <p class="gold-note">A little world, created just for you</p>
+  </section>
+
+  <!-- PAGE 2: COUNTDOWN -->
+  <section class="page" id="page2" aria-hidden="true">
+    <p class="sub-title">THE SPECIAL MOMENT</p>
+    <h2 class="glow-title">Something Beautiful Is Waiting</h2>
+    <p class="date-line">December 04, 2026 | 12:00 AM (IST)</p>
+
+    <div class="countdown" aria-label="Birthday countdown">
+      <div class="time-box"><strong id="days">00</strong><span>DAYS</span></div>
+      <div class="time-box"><strong id="hours">00</strong><span>HOURS</span></div>
+      <div class="time-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
+      <div class="time-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
+    </div>
+    <p id="countMessage" aria-live="polite">Your surprise is waiting ❤️</p>
+  </section>
+
+  <!-- PAGE 3: PASSWORD -->
+  <section class="page" id="page3" aria-hidden="true">
+    <div class="glass-card">
+      <div class="big-emoji">🔐</div>
+      <p class="sub-title">A LITTLE SECRET</p>
+      <h2 class="glow-title">One Little Secret</h2>
+      <p>Enter your special password</p>
+
+      <form id="passwordForm">
+        <input type="password" id="password" placeholder="Enter Password" autocomplete="off" required aria-label="Birthday surprise password">
+        <button class="main-btn" type="submit">UNLOCK ❤️</button>
+      </form>
+      <p id="passwordError" class="status" role="alert"></p>
+    </div>
+  </section>
+
+  <!-- PAGE 4: WISHES -->
+  <section class="page" id="page4" aria-hidden="true">
+    <div class="glass-card wishes-card">
+      <p class="sub-title">DECEMBER 04 • YOUR DAY</p>
+      <h1 class="glow-title">Happy Birthday</h1>
+      <h2 class="recipient-name">BAVANI.S ❤️</h2>
+      <div id="typedText" aria-live="polite"></div>
+      <button id="wishNext" class="main-btn hidden" type="button">WATCH YOUR SURPRISE ✨</button>
+    </div>
+  </section>
+
+  <!-- PAGE 5: VIDEO -->
+  <section class="page video-page" id="page5" aria-hidden="true">
+    <p class="video-heading">A SPECIAL VIDEO FOR YOU ❤️</p>
+    <div class="video-frame">
+      <video id="birthdayVideo" controls playsinline webkit-playsinline preload="metadata" poster="./images/video-poster.jpg">
+        <source src="./219015.mp4" type="video/mp4">
+        Your browser does not support HTML video.
+      </video>
+    </div>
+
+    <div class="video-buttons">
+      <button class="main-btn" id="playVideoBtn" type="button">▶ PLAY VIDEO</button>
+      <button class="secondary-btn" id="soundVideoBtn" type="button">🔊 SOUND ON</button>
+      <button class="secondary-btn" id="nextGiftBtn" type="button">NEXT SURPRISE ❤️</button>
+    </div>
+    <p id="videoError" class="status" role="status"></p>
+  </section>
+
+  <!-- PAGE 6: GIFT -->
+  <section class="page" id="page6" aria-hidden="true">
+    <p class="sub-title">A LITTLE GIFT</p>
+    <h2 class="glow-title">Open Your Gift 🎁</h2>
+    <p id="giftHint">Tap the gift box ❤️</p>
+
+    <button id="giftBox" class="gift-box" type="button" aria-label="Open your birthday gift">🎁</button>
+
+    <img id="photoReveal" src="./gift-photo.jpg" alt="A special birthday memory for Bavani" loading="lazy">
+    <p id="photoText" class="hidden">A little memory, specially for you ❤️</p>
+    <button id="photoNext" class="main-btn hidden" type="button">ONE LAST THING 💌</button>
+    <p id="photoError" class="status" role="status"></p>
+  </section>
+
+  <!-- PAGE 7: FEEDBACK + FINALE -->
+  <section class="page" id="page7" aria-hidden="true">
+    <div class="glass-card feedback-card">
+      <div id="feedbackContent">
+        <p class="sub-title">BEFORE THE SURPRISE ENDS</p>
+        <h2 class="glow-title">One Last Question ❤️</h2>
+        <p>How do you feel about this surprise?</p>
+
+        <form id="feedbackForm" action="https://formspree.io/f/xzepljrz" method="POST">
+          <label class="answer">
+            <input type="radio" name="feeling" value="Very Happy ❤️" required>
+            <span>Very Happy ❤️</span>
+          </label>
+          <label class="answer">
+            <input type="radio" name="feeling" value="This is so special 🥹">
+            <span>This is so special 🥹</span>
+          </label>
+          <label class="answer">
+            <input type="radio" name="feeling" value="Loved it 💗">
+            <span>Loved it 💗</span>
+          </label>
+          <label class="answer">
+            <input type="radio" name="feeling" value="Beautiful surprise ✨">
+            <span>Beautiful surprise ✨</span>
+          </label>
+
+          <textarea name="message" rows="3" placeholder="Write something from your heart..."></textarea>
+          <input type="hidden" name="person" value="BAVANI.S">
+          <input type="hidden" name="website" value="BAVANI Birthday Surprise">
+
+          <button type="submit" class="main-btn" id="submitBtn">SEND MY FEELINGS ❤️</button>
+        </form>
+      </div>
+
+      <div id="thankYou" class="hidden" aria-live="polite">
+        <div class="finale-crown">✦</div>
+        <p class="sub-title">A GOLDEN WISH, JUST FOR YOU</p>
+        <h1 class="glow-title finale-title">Thank You, BAVANI.S</h1>
+        <p>Your feelings mean a lot.</p>
+        <p>Stay Happy. Keep Smiling. Keep Shining. ✨</p>
+        <div class="finale-hearts">✧ ❤️ ✧</div>
+        <p class="finale-signoff">With love, always.</p>
+      </div>
+
+      <p id="formStatus" class="status" role="status"></p>
+    </div>
+  </section>
+
+  <noscript>This birthday surprise needs JavaScript enabled.</noscript>
 </body>
 </html>
