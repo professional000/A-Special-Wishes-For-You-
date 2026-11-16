@@ -1,15 +1,13 @@
 
-/* =====================================
-   ROYAL DIGITAL HUB
-   BAVANI.S BIRTHDAY WEBSITE
-   OPTIMIZED LUXURY GLOW THEME
-===================================== */
-
 :root {
-    --pink: #ff69b4;
-    --light-pink: #ffc1e0;
-    --purple: #a855f7;
-    --gold: #ffe5a3;
+    --pink: #D4AF37;
+    --light-pink: #FFF1C1;
+    --purple: #B8860B;
+    --gold: #FFD700;
+
+    --black: #080808;
+    --dark-gold: #17100A;
+    --champagne: #FFF1C1;
 }
 
 * {
@@ -26,8 +24,8 @@ html {
 body {
     min-height: 100vh;
     min-height: 100dvh;
-    background: #08040d;
-    color: white;
+    background: var(--black);
+    color: #FFF8E5;
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
 }
@@ -48,7 +46,7 @@ button {
     pointer-events: none;
 }
 
-/* PAGE */
+/* PAGES */
 
 .page {
     display: none;
@@ -72,7 +70,7 @@ button {
     overflow-y: auto;
     overscroll-behavior: contain;
 
-    background-color: #16091e;
+    background-color: var(--black);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,16 +88,15 @@ button {
         opacity: 0;
         transform: scale(1.015);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
 
-/* BACKGROUND IMAGES */
+/* GOLD BACKGROUNDS */
 
-#page1 {
+#page1, #page7 {
     background-image: url("./images/purple-hearts.jpg");
 }
 
@@ -113,14 +110,10 @@ button {
 
 #page5 {
     background-image: url("./images/dreamy-love.jpg");
-    background-color: #050208;
+    background-color: #050505;
 }
 
-#page7 {
-    background-image: url("./images/purple-hearts.jpg");
-}
-
-/* DARK OVERLAY */
+/* DARK GOLD OVERLAY */
 
 .page::before {
     content: "";
@@ -130,13 +123,13 @@ button {
 
     background: linear-gradient(
         135deg,
-        rgba(10,0,20,.58),
-        rgba(20,0,25,.38),
-        rgba(0,0,0,.68)
+        rgba(0,0,0,.82),
+        rgba(30,20,5,.55),
+        rgba(0,0,0,.85)
     );
 }
 
-/* BACKGROUND GLOW */
+/* GOLD GLOW */
 
 .page::after {
     content: "";
@@ -148,12 +141,12 @@ button {
     background:
         radial-gradient(
             circle at 20% 30%,
-            rgba(255,70,180,.20),
+            rgba(255,215,0,.20),
             transparent 34%
         ),
         radial-gradient(
             circle at 80% 70%,
-            rgba(140,60,255,.18),
+            rgba(212,175,55,.18),
             transparent 38%
         );
 
@@ -170,7 +163,6 @@ button {
         transform: translate3d(-1%,0,0);
         opacity: .55;
     }
-
     to {
         transform: translate3d(1%,1%,0);
         opacity: 1;
@@ -212,27 +204,26 @@ p {
     margin-top: 12px;
 }
 
-/* GLOW TITLE */
+/* GOLD TEXT GLOW */
 
 .glow-title {
-    color: #ffd4e9;
+    color: #FFE8A3;
 
     text-shadow:
-        0 0 7px #fff,
-        0 0 16px #ff69b4,
-        0 0 32px #ff1493,
-        0 0 48px #9333ea;
+        0 0 5px #FFF8DC,
+        0 0 12px #FFD700,
+        0 0 25px #D4AF37,
+        0 0 45px #B8860B;
 
-    animation: titleGlow 3.2s ease-in-out infinite alternate;
+    animation: titleGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes titleGlow {
     from {
-        filter: brightness(.94);
+        filter: brightness(.9);
     }
-
     to {
-        filter: brightness(1.18);
+        filter: brightness(1.3);
     }
 }
 
@@ -244,16 +235,17 @@ p {
 
     border-radius: 24px;
 
-    background: rgba(18,5,27,.70);
+    background: rgba(15,12,6,.82);
 
-    border: 1px solid rgba(255,160,220,.58);
+    border: 1px solid rgba(255,215,0,.65);
 
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     box-shadow:
-        0 0 20px rgba(255,70,180,.22),
-        inset 0 0 14px rgba(255,255,255,.045);
+        0 0 20px rgba(255,215,0,.18),
+        0 0 45px rgba(212,175,55,.12),
+        inset 0 0 14px rgba(255,215,0,.06);
 }
 
 /* BUTTONS */
@@ -270,24 +262,27 @@ p {
 }
 
 .main-btn {
-    color: #541039;
+    color: #211600;
 
     background: linear-gradient(
         120deg,
-        #fff0bd,
-        #ff91c8,
-        #d88aff
+        #FFF1C1,
+        #FFD700,
+        #B8860B,
+        #FFE8A3
     );
 
     box-shadow:
-        0 0 12px rgba(255,105,180,.55),
-        inset 0 0 8px rgba(255,255,255,.55);
+        0 0 12px rgba(255,215,0,.55),
+        0 0 25px rgba(212,175,55,.3),
+        inset 0 0 8px rgba(255,255,255,.6);
 }
 
 .secondary-btn {
-    color: white;
-    background: rgba(255,255,255,.12);
-    border: 1px solid #ff9ed5;
+    color: #FFE8A3;
+    background: rgba(255,215,0,.08);
+    border: 1px solid #D4AF37;
+    box-shadow: 0 0 10px rgba(212,175,55,.2);
 }
 
 .main-btn:active,
@@ -300,7 +295,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* MUSIC BUTTON */
+/* MUSIC */
 
 .music-btn {
     position: fixed;
@@ -308,14 +303,16 @@ button:disabled {
     right: 12px;
     z-index: 100;
 
-    color: white;
-    background: rgba(30,5,35,.84);
+    color: #FFE8A3;
+    background: rgba(15,12,6,.9);
 
-    border: 1px solid #ff9ed5;
+    border: 1px solid #D4AF37;
     border-radius: 50px;
 
     padding: 9px 14px;
     font-size: 10px;
+
+    box-shadow: 0 0 12px rgba(255,215,0,.25);
 }
 
 /* PAGE 1 */
@@ -326,7 +323,7 @@ button:disabled {
     aspect-ratio: 1;
     border-radius: 50%;
 
-    background: rgba(255,60,170,.20);
+    background: rgba(255,215,0,.15);
     filter: blur(48px);
 
     animation: circlePulse 5s ease-in-out infinite alternate;
@@ -349,22 +346,19 @@ button:disabled {
 
 .floating-icons span {
     font-size: clamp(22px, 7vw, 29px);
-    filter: drop-shadow(0 0 8px #ff69b4);
+    filter: drop-shadow(0 0 8px #FFD700);
     animation: floatIcon 3s ease-in-out infinite;
 }
 
 .floating-icons span:nth-child(2) {
     animation-delay: .25s;
 }
-
 .floating-icons span:nth-child(3) {
     animation-delay: .5s;
 }
-
 .floating-icons span:nth-child(4) {
     animation-delay: .75s;
 }
-
 .floating-icons span:nth-child(5) {
     animation-delay: 1s;
 }
@@ -391,15 +385,15 @@ button:disabled {
     padding: 13px 8px;
     border-radius: 15px;
 
-    background: rgba(20,5,30,.76);
-    border: 1px solid #ff9ed5;
+    background: rgba(12,10,5,.88);
+    border: 1px solid #D4AF37;
 
-    box-shadow: 0 0 12px rgba(255,105,180,.25);
+    box-shadow: 0 0 15px rgba(255,215,0,.22);
 }
 
 .time-box strong {
     display: block;
-    color: #ffe3a5;
+    color: #FFD700;
     font-size: 25px;
     text-shadow: 0 0 10px gold;
     font-variant-numeric: tabular-nums;
@@ -409,7 +403,7 @@ button:disabled {
     display: block;
     font-size: 9px;
     letter-spacing: 1px;
-    color: #ffc1e0;
+    color: #FFE8A3;
 }
 
 /* PASSWORD */
@@ -417,7 +411,7 @@ button:disabled {
 .big-emoji {
     font-size: 48px;
     margin-bottom: 8px;
-    filter: drop-shadow(0 0 12px #ff69b4);
+    filter: drop-shadow(0 0 12px #FFD700);
 }
 
 /* INPUT */
@@ -428,9 +422,9 @@ input, textarea {
     margin: 9px 0;
 
     color: white;
-    background: rgba(255,255,255,.09);
+    background: rgba(255,215,0,.07);
 
-    border: 1px solid rgba(255,160,220,.55);
+    border: 1px solid rgba(255,215,0,.48);
     border-radius: 12px;
 
     outline: none;
@@ -439,16 +433,16 @@ input, textarea {
 
 input::placeholder,
 textarea::placeholder {
-    color: rgba(255,255,255,.66);
+    color: rgba(255,241,193,.66);
 }
 
 input:focus,
 textarea:focus {
-    border-color: #ff69b4;
-    box-shadow: 0 0 10px rgba(255,105,180,.4);
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(255,215,0,.4);
 }
 
-/* BIRTHDAY WISHES */
+/* BIRTHDAY MESSAGE */
 
 #typedText {
     width: 100%;
@@ -457,16 +451,16 @@ textarea:focus {
 
     margin: 14px auto;
 
-    color: #fff1f8;
+    color: #FFF1C1;
     font-size: 13px;
     line-height: 1.9;
 
     white-space: pre-line;
 
-    text-shadow: 0 0 7px rgba(255,105,180,.7);
+    text-shadow: 0 0 7px rgba(255,215,0,.35);
 }
 
-/* VIDEO */
+/* VIDEO 4:3 */
 
 .video-page {
     padding-top: max(50px, env(safe-area-inset-top));
@@ -474,25 +468,28 @@ textarea:focus {
 
 .video-heading {
     font-family: 'Playfair Display', serif;
-    color: #ffc4e1;
+    color: #FFE8A3;
     font-size: 18px;
-    text-shadow: 0 0 12px #ff69b4;
+    text-shadow: 0 0 12px #FFD700;
     margin: 4px 0 8px;
 }
 
 #birthdayVideo {
     display: block;
-    width: min(100%, 430px);
-    height: min(62dvh, 650px);
-    min-height: 180px;
+    width: min(100%, 480px);
+    aspect-ratio: 4 / 3;
+    height: auto;
+    max-height: 55dvh;
 
     object-fit: contain;
     background: #000;
 
-    border: 1px solid #ff9ed5;
+    border: 1px solid #D4AF37;
     border-radius: 15px;
 
-    box-shadow: 0 0 18px rgba(255,105,180,.42);
+    box-shadow:
+        0 0 18px rgba(255,215,0,.4),
+        0 0 35px rgba(212,175,55,.15);
 }
 
 .video-buttons {
@@ -511,7 +508,7 @@ textarea:focus {
 
     font-size: clamp(82px, 24vw, 112px);
 
-    filter: drop-shadow(0 0 12px #ff69b4);
+    filter: drop-shadow(0 0 15px #FFD700);
 
     animation: giftMove 2s ease-in-out infinite;
 }
@@ -522,19 +519,26 @@ textarea:focus {
     }
 }
 
+/* GIFT PHOTO 1848 x 4080 */
+
 #photoReveal {
     display: none;
 
-    width: min(100%, 420px);
-    max-height: 48dvh;
+    width: min(100%, 360px);
+    max-height: 58dvh;
 
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+    aspect-ratio: 1848 / 4080;
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
 
     border-radius: 18px;
-    border: 2px solid #ffb5dc;
+    border: 2px solid #D4AF37;
 
-    box-shadow: 0 0 20px rgba(255,105,180,.55);
+    box-shadow:
+        0 0 20px rgba(255,215,0,.5),
+        0 0 40px rgba(212,175,55,.2);
 
     animation: photoReveal .75s ease both;
 }
@@ -544,7 +548,6 @@ textarea:focus {
         opacity: 0;
         transform: scale(.88);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -570,17 +573,17 @@ textarea:focus {
 
     text-align: left;
 
-    border: 1px solid rgba(255,160,220,.38);
+    border: 1px solid rgba(255,215,0,.38);
     border-radius: 12px;
 
-    background: rgba(255,255,255,.07);
+    background: rgba(255,215,0,.06);
 }
 
 .answer input {
     width: 18px;
     height: 18px;
     margin: 0;
-    accent-color: #ff69b4;
+    accent-color: #FFD700;
     flex: 0 0 auto;
 }
 
@@ -593,7 +596,7 @@ textarea:focus {
 .status {
     min-height: 18px;
     margin-top: 9px;
-    color: #ffc1e0;
+    color: #FFE8A3;
     font-size: 12px;
     overflow-wrap: anywhere;
 }
@@ -603,7 +606,7 @@ textarea:focus {
 }
 
 #thankYou p {
-    color: #ffd4e9;
+    color: #FFE8A3;
     margin: 8px 0;
 }
 
@@ -611,7 +614,7 @@ textarea:focus {
     display: none !important;
 }
 
-/* FLOATING EMOJIS */
+/* FLOATING GOLD EFFECTS */
 
 .floating-emoji {
     position: fixed;
@@ -620,7 +623,7 @@ textarea:focus {
     pointer-events: none;
     user-select: none;
 
-    filter: drop-shadow(0 0 7px #ff69b4);
+    filter: drop-shadow(0 0 8px #FFD700);
 
     animation: emojiFloat linear forwards;
 }
@@ -630,11 +633,9 @@ textarea:focus {
         transform: translate3d(0,0,0) scale(.7);
         opacity: 0;
     }
-
     15% {
         opacity: .9;
     }
-
     100% {
         transform: translate3d(12px,-112vh,0) scale(1);
         opacity: 0;
@@ -651,7 +652,7 @@ textarea:focus {
 
 .burst {
     font-size: 21px;
-    filter: drop-shadow(0 0 7px #ff69b4);
+    filter: drop-shadow(0 0 7px #FFD700);
     animation: burstEffect .75s ease-out forwards;
 }
 
@@ -663,7 +664,7 @@ textarea:focus {
 }
 
 .sparkle {
-    color: #ffe7ae;
+    color: #FFD700;
     font-size: 15px;
     text-shadow: 0 0 8px white;
     animation: sparkleFade .8s ease-out forwards;
@@ -679,7 +680,6 @@ textarea:focus {
 /* MOBILE */
 
 @media (max-width: 480px) {
-
     .page {
         padding-left: 14px;
         padding-right: 14px;
@@ -699,14 +699,18 @@ textarea:focus {
 
     #birthdayVideo {
         width: 100%;
-        height: 57dvh;
+        max-height: 48dvh;
+    }
+
+    #photoReveal {
+        width: min(100%, 300px);
+        max-height: 52dvh;
     }
 }
 
 /* SMALL HEIGHT */
 
 @media (max-height: 650px) {
-
     .page {
         justify-content: flex-start;
         padding-top: 54px;
@@ -722,23 +726,25 @@ textarea:focus {
     }
 
     #birthdayVideo {
-        height: 48dvh;
+        max-height: 43dvh;
     }
 
     #typedText {
         min-height: 110px;
+    }
+
+    #photoReveal {
+        max-height: 45dvh;
     }
 }
 
 /* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
-
     *, *::before, *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
     }
-
 }
